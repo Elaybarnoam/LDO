@@ -1,0 +1,56 @@
+[project]
+name = "visual-imu-loop-detector"
+version = "0.1.0"
+description = "Visual-inertial loop detection and evaluation experiments"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "numpy",
+    "scipy",
+    "opencv-python; sys_platform == 'win32'",
+    "opencv-python-headless; sys_platform != 'win32'",
+    "PyYAML",
+    "pandas",
+    "tzdata",
+]
+
+[project.optional-dependencies]
+ldo = [
+    "torch==2.11.0",
+    "torchvision==0.26.0",
+    "safetensors==0.8.0",
+    "huggingface-hub==2.1.1",
+    "lightglue @ git+https://github.com/cvg/LightGlue.git@eb42fee2d71449efb0aa5c10549752b5d75384d8",
+]
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.12"]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+torchvision = { index = "pytorch-cu128" }
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+"stereo_observations/stereo_worker.py" = ["I001", "B905"]
+
+[tool.ruff.format]
+exclude = ["stereo_observations/stereo_worker.py"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "evaluation/tests"]
+pythonpath = [".", "evaluation/src"]
+
+[tool.uv]
+package = false
+link-mode = "copy"

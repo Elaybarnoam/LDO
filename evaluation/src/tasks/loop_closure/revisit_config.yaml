@@ -1,0 +1,30 @@
+version: 1
+protocol:
+  seed: 0
+  exclusion_ns: 20000000000
+  pose_tolerance_ms: 10
+  query_stride: 1
+  k_values:
+  - 1
+  - 5
+  bootstrap_block_queries: 3
+  bootstrap_samples: 2000
+reference:
+  root: evaluation/references/MH_01_easy_revisits_v1
+  sequence: /opt/loop-detector/datasets/euroc/MH_01_easy
+  replay: evaluation/output/native/orb_dbow2/a45890c4ba5941739e86664e6a4790da_98fa65de8ac74cbd833a1c9f577e2363/replay.tsv
+methods:
+  orb:
+    replay: evaluation/output/native/orb_dbow2/a45890c4ba5941739e86664e6a4790da_98fa65de8ac74cbd833a1c9f577e2363/replay.tsv
+    trace: evaluation/output/native/orb_dbow2/a45890c4ba5941739e86664e6a4790da_98fa65de8ac74cbd833a1c9f577e2363/retrieval.jsonl
+    checks: evaluation/output/native/orb_dbow2/coverage_2026-10-04_00-09-15_36271dad_final_frozen/candidate_checks
+  ldo:
+    replay: evaluation/output/native/ldo/a45890c4ba5941739e86664e6a4790da_1e8436043e73433a80a407990c1055c5/replay.tsv
+    trace: evaluation/output/native/ldo/a45890c4ba5941739e86664e6a4790da_1e8436043e73433a80a407990c1055c5/retrieval.jsonl
+    checks: evaluation/output/native/ldo/coverage_2026-10-04_00-09-15_36271dad_final/candidate_checks
+matching:
+  orb_config: evaluation/src/benchmarks/orb_dbow2/config.yaml
+  ldo_config: ldo/configs/megaloc_lightglue.yaml
+  xyz_config: evaluation/src/tasks/feature_matching/xyz/config.yaml
+  orb_feature_root: evaluation/output/native/orb_dbow2/a45890c4ba5941739e86664e6a4790da_98fa65de8ac74cbd833a1c9f577e2363/orb_features
+output: evaluation/output

@@ -1,0 +1,14 @@
+version: 1
+proposal_distance_m: 3.0
+proposal_orientation_degrees: 90.0
+event_maximum_query_gap_ns: 1500000000
+positive_reviewers: 2
+hard_negative_reviewers: 2
+ordinary_negative_reviewers: 1
+target_precision: 0.99
+development_sequences:
+- MH_01_easy
+held_out_sequences:
+- V1_01_easy
+- V2_01_easy
+threshold_status: provisional_development_protocol

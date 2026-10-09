@@ -1,0 +1,13 @@
+version: 1
+seed: 0
+minimum_usable_points: 8
+minimum_inliers: 8
+minimum_inlier_ratio: 0.4
+ransac_error_px: 3.0
+maximum_median_error_px: 2.0
+maximum_p95_error_px: 3.0
+ransac_iterations: 2000
+ransac_confidence: 0.999
+minimum_cheirality_ratio: 0.95
+minimum_second_axis_ratio: 0.001
+maximum_pose_condition: 100000000.0

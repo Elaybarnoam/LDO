@@ -1,0 +1,25 @@
+# Local Python environment and caches
+.venv/
+.venv-linux/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Local secrets
+.env
+.env.*
+!.env.example
+
+# Downloaded datasets and generated evaluation results
+/evaluation/datasets/**
+/evaluation/output/**
+/evaluation/*-source.tar.gz
+
+# Build artifacts
+build/
+dist/
+
+# Generated reference universes and local annotation snapshots
+/evaluation/references/**

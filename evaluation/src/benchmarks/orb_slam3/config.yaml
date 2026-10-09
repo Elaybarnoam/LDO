@@ -1,0 +1,15 @@
+version: 1
+sequence: MH_01_easy
+dataset_root: evaluation/datasets/euroc
+native_dataset_root: /opt/loop-detector/datasets/euroc
+workspace_root: /opt/loop-detector/runs/orb_slam3
+artifact_root: evaluation/output/native/orb_slam3
+diagnostics:
+  validate_revisit: true
+native:
+  binary: /opt/loop-detector/ORB_SLAM3/Examples/Stereo-Inertial/stereo_inertial_euroc
+  vocabulary: /opt/loop-detector/ORB_SLAM3/Vocabulary/ORBvoc.txt
+  settings: /opt/loop-detector/ORB_SLAM3/Examples/Stereo-Inertial/EuRoC.yaml
+  manifest: /opt/loop-detector/ORB_SLAM3/evaluation-build.json
+  library_dirs:
+    - /opt/loop-detector/pangolin-install/lib

@@ -1,0 +1,10 @@
+stereo_model_python: /opt/loop-detector/fast-stereo-env/bin/python
+stereo_model_source: /opt/loop-detector/Fast-FoundationStereo
+stereo_model_checkpoint: /opt/loop-detector/Fast-FoundationStereo/weights/nvidia-c-fast/model.onnx
+stereo_lr_max_error_px: 1.0
+stereo_pixel_sigma_px: 1.0
+stereo_minimum_depth_m: 0.25
+stereo_maximum_depth_m: 50.0
+stereo_minimum_parallax_degrees: 0.5
+stereo_maximum_reprojection_px: 2.0
+stereo_maximum_relative_depth_sigma: 0.25

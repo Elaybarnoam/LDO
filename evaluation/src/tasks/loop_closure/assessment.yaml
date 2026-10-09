@@ -1,0 +1,4 @@
+version: 1
+maximum_translation_error_m: 0.20
+maximum_rotation_error_degrees: 5.0
+threshold_status: provisional_development_not_calibrated_for_publication

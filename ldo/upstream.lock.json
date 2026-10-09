@@ -1,0 +1,5 @@
+{
+  "megaloc": {"repository": "https://github.com/gmberton/MegaLoc", "revision": "5fe0dd697c4a70ba3e23607f6716ab3c606b16db"},
+  "lightglue": {"repository": "https://github.com/cvg/LightGlue", "revision": "eb42fee2d71449efb0aa5c10549752b5d75384d8"},
+  "megaloc_weights": {"repository": "gberton/MegaLoc", "revision": "a0f34722c4297ff787e022433799250180860af7", "filename": "model.safetensors"}
+}

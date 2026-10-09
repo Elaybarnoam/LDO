@@ -1,0 +1,10 @@
+# Sparse full-sequence replay for integration verification, not the main comparison.
+version: 1
+sequence: MH_01_easy
+dataset_root: evaluation/datasets/euroc
+native_dataset_root: /opt/loop-detector/datasets/euroc
+sample_hz: 0.2
+detector_config: ldo/configs/megaloc_lightglue.yaml
+candidate_evaluation:
+  enabled: true
+  config: evaluation/src/tasks/feature_matching/xyz/config.yaml

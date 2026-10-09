@@ -1,0 +1,31 @@
+version: 1
+dataset:
+  root: /opt/loop-detector/datasets/tartanair_v2
+  repository: theairlabcmu/tartanair2
+  revision: 0d2d145e973832742a2aaa04b7d2ebffc8d82817
+  environment: ArchVizTinyHouseDay
+  difficulty: Data_easy
+  trajectories: [P000, P001, P002, P003, P004, P005, P006]
+protocol:
+  seed: 0
+  frame_stride: 5
+  exclusion_ns: 5000000000
+  top_k: 5
+  grid_step: 24
+  loop_overlap: 0.20
+  minimum_depth_m: 0.25
+  maximum_depth_m: 50.0
+  depth_absolute_tolerance_m: 0.03
+  depth_relative_tolerance: 0.01
+  feature_pixel_tolerance: 3.0
+  feature_xyz_tolerance_m: 0.05
+  feature_xyz_relative_tolerance: 0.005
+  depth_edge_relative_tolerance: 0.05
+  event_gap_ns: 1500000000
+  target_precision: 0.99
+ldo_config: evaluation/src/tasks/reference_geometry/ldo.yaml
+orb_config: evaluation/src/benchmarks/orb_dbow2/config.yaml
+verifier_config: loop_verification/config.yaml
+stereo_config: loop_verification/stereo.yaml
+assessment_config: evaluation/src/tasks/loop_closure/assessment.yaml
+output: evaluation/output
