@@ -51,7 +51,9 @@ def validate_config(config):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=("install", "prepare", "run", "report"))
+    parser.add_argument(
+        "command", choices=("install", "prepare", "run", "evaluate", "pipeline", "report")
+    )
     parser.add_argument(
         "--config", type=Path, default=ROOT / "evaluation/src/tasks/reference_geometry/config.yaml"
     )
@@ -62,7 +64,13 @@ def main():
     args = parser.parse_args()
     config = yaml.safe_load(args.config.read_text())
     validate_config(config)
-    if args.command == "report":
+    if args.command == "evaluate":
+        if args.results is None:
+            parser.error("evaluate requires --results containing saved detector evidence")
+        from .direct import evaluate_saved
+
+        print(evaluate_saved(config, args.config, args.results))
+    elif args.command == "report":
         if args.results is None:
             parser.error("report requires --results")
         from tasks.loop_closure.comparison.cli import publish_report
@@ -76,6 +84,12 @@ def main():
         task = result["reference_geometry"]
         if task["manifest"]["protocol"] != config["protocol"]:
             raise ValueError("Report protocol differs from completed benchmark")
+        if task.get("mode") == "reference_features":
+            from .direct_report import aggregate as aggregate_features
+
+            task["aggregate"] = aggregate_features(task["sequences"], config["protocol"]["top_k"])
+            print(publish_report(result, local(config["output"]), args.config))
+            return
         audit_constraints(task)
         task["aggregate"] = aggregate(task["sequences"], config["protocol"]["top_k"])
         task["depth_coverage"] = summarize(
@@ -115,9 +129,11 @@ def main():
         (index / "installation.json").write_text(json.dumps(result, indent=2))
         print(json.dumps(result, indent=2))
     else:
-        from .workflow import prepare, run
+        from .workflow import prepare, run, run_pipeline
 
         if args.command == "prepare":
             print(prepare(config, args.config))
+        elif args.command == "pipeline":
+            print(run_pipeline(config, args.config, args.prepared))
         else:
             print(run(config, args.config, args.prepared))

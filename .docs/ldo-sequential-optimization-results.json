@@ -1,0 +1,280 @@
+{
+  "experiment": "sequential_ldo_optimization",
+  "created_at": "2026-10-09T15:52:02.255854+00:00",
+  "test_environment": "CountryHouse",
+  "test_trajectories": [
+    "P000",
+    "P001",
+    "P002",
+    "P003",
+    "P004",
+    "P005"
+  ],
+  "freeze_manifest_sha256": "f21980432b297b11939bae259b2dc810ca37d5a2bfd330291bd8a0d0c44a5495",
+  "baseline_report": "/mnt/c/Users/elayb/OneDrive/Documents/visual\u2013IMU loop detector/evaluation/output/comparison_2026-10-09_18-40-31_408161_319882d6.json",
+  "reference_geometry_code_sha256": "07947cf336065d8c25c484552f729347ca7b8ca787465ed2743288c000c9add4",
+  "test_was_used_for_parameter_selection": false,
+  "variants": {
+    "baseline": {
+      "features": {
+        "supported": 146270,
+        "contradicted": 66687,
+        "untestable": 53618,
+        "reported": 266575,
+        "judgeable_fraction": 0.7988633592797524,
+        "supported_among_judgeable": 0.6868522753419705,
+        "supported_fraction_bounds": [
+          0.5487011160086279,
+          0.7498377567288755
+        ]
+      },
+      "candidates": {
+        "returned_pairs": 1579,
+        "true_positive_pairs": 670,
+        "false_positive_pairs": 791,
+        "unknown_pairs": 118,
+        "confirmed_events": 19,
+        "detected_confirmed_events": 19
+      },
+      "zero_match_pairs": 0
+    },
+    "confidence": {
+      "features": {
+        "supported": 141287,
+        "contradicted": 45003,
+        "untestable": 39409,
+        "reported": 225699,
+        "judgeable_fraction": 0.8253913397932645,
+        "supported_among_judgeable": 0.758425036233829,
+        "supported_fraction_bounds": [
+          0.6259974567897952,
+          0.8006061169965307
+        ]
+      },
+      "candidates": {
+        "returned_pairs": 1579,
+        "true_positive_pairs": 670,
+        "false_positive_pairs": 791,
+        "unknown_pairs": 118,
+        "confirmed_events": 19,
+        "detected_confirmed_events": 19
+      },
+      "zero_match_pairs": 29
+    },
+    "candidate_policy": {
+      "features": {
+        "supported": 134984,
+        "contradicted": 33794,
+        "untestable": 34916,
+        "reported": 203694,
+        "judgeable_fraction": 0.8285860162793209,
+        "supported_among_judgeable": 0.7997724821955469,
+        "supported_fraction_bounds": [
+          0.6626802949522322,
+          0.8340942786729113
+        ]
+      },
+      "candidates": {
+        "returned_pairs": 800,
+        "true_positive_pairs": 633,
+        "false_positive_pairs": 79,
+        "unknown_pairs": 88,
+        "confirmed_events": 19,
+        "detected_confirmed_events": 17
+      },
+      "zero_match_pairs": 0
+    },
+    "full_depth_control": {
+      "features": {
+        "supported": 138131,
+        "contradicted": 35737,
+        "untestable": 37052,
+        "reported": 210920,
+        "judgeable_fraction": 0.8243315000948227,
+        "supported_among_judgeable": 0.7944590148848552,
+        "supported_fraction_bounds": [
+          0.6548975915038877,
+          0.830566091409065
+        ]
+      },
+      "candidates": {
+        "returned_pairs": 816,
+        "true_positive_pairs": 638,
+        "false_positive_pairs": 88,
+        "unknown_pairs": 90,
+        "confirmed_events": 19,
+        "detected_confirmed_events": 18
+      },
+      "zero_match_pairs": 0
+    },
+    "adapted_head": {
+      "features": {
+        "supported": 137940,
+        "contradicted": 35431,
+        "untestable": 36731,
+        "reported": 210102,
+        "judgeable_fraction": 0.8251753910005616,
+        "supported_among_judgeable": 0.7956347947465262,
+        "supported_fraction_bounds": [
+          0.6565382528486163,
+          0.8313628618480547
+        ]
+      },
+      "candidates": {
+        "returned_pairs": 811,
+        "true_positive_pairs": 636,
+        "false_positive_pairs": 86,
+        "unknown_pairs": 89,
+        "confirmed_events": 19,
+        "detected_confirmed_events": 18
+      },
+      "zero_match_pairs": 0
+    },
+    "development_selected": {
+      "features": {
+        "supported": 134984,
+        "contradicted": 33794,
+        "untestable": 34916,
+        "reported": 203694,
+        "judgeable_fraction": 0.8285860162793209,
+        "supported_among_judgeable": 0.7997724821955469,
+        "supported_fraction_bounds": [
+          0.6626802949522322,
+          0.8340942786729113
+        ]
+      },
+      "candidates": {
+        "returned_pairs": 800,
+        "true_positive_pairs": 633,
+        "false_positive_pairs": 79,
+        "unknown_pairs": 88,
+        "confirmed_events": 19,
+        "detected_confirmed_events": 17
+      },
+      "zero_match_pairs": 0
+    }
+  },
+  "steps": {
+    "1": {
+      "supported_match_retention": 0.9659328638818623,
+      "contradicted_matches_removed": 21684,
+      "true_candidate_retention": 1.0,
+      "false_candidates_removed": 0,
+      "confirmed_event_retention": 1.0
+    },
+    "2": {
+      "supported_match_retention": 0.9553886769483392,
+      "contradicted_matches_removed": 11209,
+      "true_candidate_retention": 0.9447761194029851,
+      "false_candidates_removed": 712,
+      "confirmed_event_retention": 0.8947368421052632
+    },
+    "3": {
+      "supported_match_retention": 1.0218988917205003,
+      "contradicted_matches_removed": -1637,
+      "true_candidate_retention": 1.004739336492891,
+      "false_candidates_removed": -7,
+      "confirmed_event_retention": 1.0588235294117647
+    },
+    "learning_vs_equal_compute": {
+      "supported_match_retention": 0.9986172546350928,
+      "contradicted_matches_removed": 306,
+      "true_candidate_retention": 0.9968652037617555,
+      "false_candidates_removed": 2,
+      "confirmed_event_retention": 1.0
+    },
+    "overall": {
+      "supported_match_retention": 0.9228413208450127,
+      "contradicted_matches_removed": 32893,
+      "true_candidate_retention": 0.9447761194029851,
+      "false_candidates_removed": 712,
+      "confirmed_event_retention": 0.8947368421052632
+    }
+  },
+  "orb": {
+    "orb": {
+      "supported": 14161,
+      "contradicted": 7856,
+      "untestable": 2123,
+      "zero_match_pairs": 37,
+      "reported_matches": 24140,
+      "returned_pairs": 1579,
+      "judgeable_fraction": 0.9120546810273406,
+      "support_among_judgeable": 0.6431848117363855,
+      "contradiction_among_judgeable": 0.35681518826361447,
+      "support_fraction_bounds": [
+        0.5866197183098592,
+        0.6745650372825186
+      ],
+      "contradiction_fraction_bounds": [
+        0.32543496271748135,
+        0.41338028169014085
+      ],
+      "supported_per_returned_pair": 8.968334388853705,
+      "retrieval": {
+        "true_positive_pairs": 497,
+        "false_positive_pairs": 1011,
+        "unknown_pairs": 71,
+        "confirmed_events": 19,
+        "detected_confirmed_events": 19
+      }
+    },
+    "ldo": {
+      "supported": 146270,
+      "contradicted": 66687,
+      "untestable": 53618,
+      "zero_match_pairs": 0,
+      "reported_matches": 266575,
+      "returned_pairs": 1579,
+      "judgeable_fraction": 0.7988633592797524,
+      "support_among_judgeable": 0.6868522753419705,
+      "contradiction_among_judgeable": 0.31314772465802954,
+      "support_fraction_bounds": [
+        0.5487011160086279,
+        0.7498377567288755
+      ],
+      "contradiction_fraction_bounds": [
+        0.25016224327112446,
+        0.451298883991372
+      ],
+      "supported_per_returned_pair": 92.63457884737176,
+      "retrieval": {
+        "true_positive_pairs": 670,
+        "false_positive_pairs": 791,
+        "unknown_pairs": 118,
+        "confirmed_events": 19,
+        "detected_confirmed_events": 19
+      }
+    }
+  },
+  "development": {
+    "1": {
+      "supported_match_retention": 0.9261637239165329,
+      "contradicted_matches_removed": 945,
+      "true_candidate_retention": 1.0,
+      "false_candidates_removed": 0,
+      "confirmed_event_retention": 1.0
+    },
+    "2": {
+      "supported_match_retention": 0.902368573079145,
+      "contradicted_matches_removed": 386,
+      "true_candidate_retention": 0.9166666666666666,
+      "false_candidates_removed": 65,
+      "confirmed_event_retention": 1.0
+    },
+    "3": {
+      "supported_match_retention": 1.0064020486555698,
+      "contradicted_matches_removed": 33,
+      "true_candidate_retention": 1.0,
+      "false_candidates_removed": -1,
+      "confirmed_event_retention": 1.0
+    },
+    "training_promoted": false
+  },
+  "limitations": [
+    "One held-out synthetic environment; upstream pretraining overlap unaudited.",
+    "Unknown reference matches remain unknown, not incorrect.",
+    "Candidate labels use frozen 20% bidirectional visible overlap; not pose accuracy.",
+    "No latency or real-world SLAM improvement claim from this experiment."
+  ]
+}

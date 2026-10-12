@@ -486,6 +486,16 @@ def render_comparison(result: dict) -> str:
         from ..connection_diagnostics import render_diagnostics
 
         lines += render_diagnostics(result["connection_diagnostics"])
+    if result.get("reference_geometry", {}).get("mode") == "reference_features":
+        lines += [
+            "## Provenance and limitations",
+            "",
+            "The companion JSON and artifact directory retain original detector evidence hashes, reference hashes, per-feature world coordinates and numerical errors. No operational acceptance or fitted pose is measured in this experiment.",
+            "",
+            "This short synthetic pilot does not establish full SLAM trajectory improvement or generalization.",
+            "",
+        ]
+        return "\n".join(lines)
     if result.get("reference_geometry"):
         lines += [
             "## Provenance and limitations",

@@ -1,33 +1,55 @@
 # Independent reference-geometry task
 
-This task compares frozen ORB + DBoW2 against LDO-MegaLoc-LightGlue using TartanAir V2 simulator depth and camera poses as external references. It is separate from the existing EuRoC feature-matching and loop-closure tasks. The original XYZ implementation is unchanged.
+The default experiment evaluates ORB + DBoW2 and LDO feature correspondences directly against TartanAir reference depth and camera poses. Ground truth stays outside both detectors. The original EuRoC XYZ implementation remains unchanged.
 
-## Entry points
-Run from the project directory:
+## Default topology
 
-```powershell
-.\.venv\Scripts\python.exe evaluation/reference_geometry.py install
-.\.venv\Scripts\python.exe evaluation/reference_geometry.py prepare
-.\.venv\Scripts\python.exe evaluation/reference_geometry.py run --prepared evaluation/output/tartanair_reference_<id>
-.\.venv\Scripts\python.exe evaluation/reference_geometry.py report --results evaluation/output/tartanair_benchmark_<id>/summary.json
+```text
+Identical camera frames -> ORB + DBoW2 / LDO -> candidates + original feature assignments
+                                                   |
+Reference depth + camera poses -> world XYZ for each reported endpoint
+                                                   |
+                                  supported / contradicted / unknown
+                                                   |
+                              per-feature JSONL + dated JSON/Markdown
 ```
 
-Windows routes execution to the installed WSL environment. Installation pins archive revision, size and SHA256. Data reside in `/opt/loop-detector/datasets/tartanair_v2`; `evaluation/datasets/tartanair_v2/installation.json` is the project index. `run` also prepares references if `--prepared` is omitted. A run always creates a fresh evidence directory. `report` reuses saved evidence and does not run either detector.
+No learned stereo estimator, PnP, RANSAC, operational verifier, accepted-pair selection or pose-failure count participates in this measurement. Every reported assignment is included. Each saved feature row contains both reference world positions when usable, their XYZ disagreement, reprojection error, and final reference verdict.
 
-## Boundaries
-- `cli.py`: validated configuration and command dispatch.
-- `install.py`: archive download, validation and safe extraction.
-- `dataset.py`: source timestamps, calibrated detector replay and stereo reference audit.
-- `geometry.py`: independent depth/pose reference labels and feature judgments.
-- `detectors.py`: frozen ORB and replaceable LDO adapters; detector inputs contain no reference depth or poses.
-- `workflow.py`: prepare references, run adapters, shared observation-only verification and evidence output.
-- `depth_coverage.py`: explains untestable reference-depth checks without changing decisions.
-- `reporting.py`: aggregate saved measurements and render readable reports.
+## Commands
 
-## Outputs
-Frozen reference directories contain replay images, calibration, frame and input hashes, all eligible pair labels, event definitions and a manifest. Benchmark directories contain model traces, exact extracted feature assignments, every feature verdict, operational verifier decisions, independent pose assessments, source snapshots and per-trajectory summaries. The evaluation file handler publishes dated Markdown and JSON reports.
+From the project root:
 
-## Scope of the installed pilot
-All seven ArchVizTinyHouseDay/Data_easy trajectories are used. They last only 9 to 15 seconds, so a dedicated 5-second exclusion replaces the inapplicable 20-second EuRoC exclusion equally for both methods. This is a short synthetic pipeline pilot. It cannot establish long-term revisit performance, real-world superiority or OOD generalization. Neither current detector consumes IMU, although the source IMU files are installed.
+```powershell
+uv run python evaluation/reference_geometry.py install
+uv run python evaluation/reference_geometry.py prepare
+# Fresh model inference followed by direct reference checks:
+uv run python evaluation/reference_geometry.py run --prepared evaluation/output/tartanair_reference_<id>
+# Recompute from saved detector traces and assignments, without running models:
+uv run python evaluation/reference_geometry.py evaluate --results evaluation/output/tartanair_benchmark_<id>/summary.json
+# Render a completed direct evaluation:
+uv run python evaluation/reference_geometry.py report --results evaluation/output/tartanair_reference_features_<id>/summary.json
+# Separate, optional full observation-stereo + operational-verifier experiment:
+uv run python evaluation/reference_geometry.py pipeline --prepared evaluation/output/tartanair_reference_<id>
+```
 
-A candidate is a retrieval proposal. An accepted constraint is the shared operational verifier's decision. A surface-overlap label and a relative-pose tolerance check measure separate properties. Unknown labels are never counted as incorrect. See `.docs/tartanair-reference-geometry-plan.md` for the protocol and limitations.
+Windows forwards to the installed WSL environment. `evaluate` reuses original detector outputs after checking input and feature hashes; it reads no previous verifier decisions or inlier masks. `run` prepares references when `--prepared` is omitted. Each evaluation creates a new immutable evidence directory.
+
+## Modules
+
+- `cli.py`: validation and dispatch.
+- `install.py`, `dataset.py`: pinned installation and source adaptation.
+- `detectors.py`: image-only model adapters and original assignments.
+- `direct.py`: default direct reference evaluation, fresh or saved detector evidence.
+- `direct_report.py`: feature and independently labeled candidate metrics, with unknown bounds.
+- `geometry.py`: frozen depth, camera transforms, visibility and feature gates.
+- `depth_coverage.py`: reason for each untestable feature.
+- `workflow.py`, `reporting.py`: reference preparation and separately requested full-pipeline diagnostics.
+
+## Interpretation
+
+Feature verdicts measure reported correspondence correctness under frozen reference-depth/reprojection tolerances. They do not declare an entire candidate image pair false because some matches are incorrect. Image-pair surface overlap is labeled independently. Unknown matches remain unknown; counts and rates among judgeable features are reported separately, together with bounds accounting for all unknown matches. Zero-match candidate pairs remain in pair-level totals.
+
+The installed pilot uses all seven short ArchVizTinyHouseDay/Data_easy trajectories, identical grayscale images, and a shared 5-second exclusion. It does not establish long-term revisit performance, real-world superiority or OOD generalization. Both detectors currently use camera images only. Depth boundaries and the useful 0.25-50 m depth range can prevent reference judgments. Static-world assumptions and pretrained dataset overlap remain unaudited.
+
+Data remain in WSL `/opt/loop-detector/datasets/tartanair_v2`, indexed by `evaluation/datasets/tartanair_v2/installation.json`. Fresh detector evidence is under `evaluation/output/tartanair_detector_evidence_*`; direct evaluation results are under `evaluation/output/tartanair_reference_features_*`. The existing evaluation file handler publishes dated reports.

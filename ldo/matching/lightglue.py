@@ -1,5 +1,7 @@
 """Compatible LightGlue assignments; confidence is not a loop probability."""
 
+from pathlib import Path
+
 import numpy as np
 import torch
 from lightglue import LightGlue
@@ -8,12 +10,37 @@ from ..contracts import CorrespondenceBatch, LocalFeatures
 
 
 class LightGlueMatcher:
-    def __init__(self, device: torch.device, family: str, threshold: float) -> None:
-        if family != "superpoint":
-            raise ValueError("This adapter requires a SuperPoint-compatible checkpoint")
+    def __init__(
+        self,
+        device: torch.device,
+        family: str,
+        threshold: float,
+        *,
+        checkpoint: Path | None = None,
+        checkpoint_sha256: str | None = None,
+        full_depth: bool = False,
+    ) -> None:
+        if family not in {"superpoint", "aliked"}:
+            raise ValueError("This adapter requires a supported compatible checkpoint")
+        if checkpoint is not None and family != "superpoint":
+            raise ValueError("Adapted checkpoint is only compatible with SuperPoint")
         self.device = device
         self.family = family
-        self.model = LightGlue(features=family, filter_threshold=threshold).eval().to(device)
+        settings = (
+            {"depth_confidence": -1, "width_confidence": -1, "flash": False, "mp": False}
+            if full_depth
+            else {}
+        )
+        self.model = LightGlue(features=family, filter_threshold=threshold, **settings).eval()
+        if checkpoint is not None:
+            from ..artifacts import sha256
+
+            if not full_depth or sha256(checkpoint) != checkpoint_sha256:
+                raise ValueError("Adapted checkpoint integrity or full-depth requirement failed")
+            self.model.load_state_dict(
+                torch.load(checkpoint, map_location="cpu", weights_only=True), strict=True
+            )
+        self.model.to(device)
 
     def _tensors(self, features: LocalFeatures) -> dict[str, torch.Tensor]:
         return {

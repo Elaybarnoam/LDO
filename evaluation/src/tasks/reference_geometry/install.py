@@ -19,13 +19,22 @@ def install(settings):
     api = f"https://huggingface.co/api/datasets/{repo}/tree/{revision}/{prefix}?limit=1000"
     with urllib.request.urlopen(api, timeout=60) as response:
         metadata = {item["path"]: item for item in json.load(response)}
-    archive_names = [
+    archive_names = settings.get("archives") or [
         "image_lcam_front.zip",
         "image_rcam_front.zip",
         "depth_lcam_front.zip",
         "depth_rcam_front.zip",
         "imu.zip",
     ]
+    allowed = {
+        "image_lcam_front.zip",
+        "image_rcam_front.zip",
+        "depth_lcam_front.zip",
+        "depth_rcam_front.zip",
+        "imu.zip",
+    }
+    if not set(archive_names) <= allowed or len(set(archive_names)) != len(archive_names):
+        raise ValueError("Invalid requested dataset archives")
     cache = root / "archives"
     cache.mkdir(exist_ok=True)
 
@@ -78,5 +87,7 @@ def install(settings):
         "root": str(root),
         "artifacts": artifacts,
     }
-    write_json(root / "installation.json", manifest)
+    temporary = root / "installation.pending.json"
+    temporary.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    temporary.replace(root / "installation.json")
     return manifest

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LDO · Geometry failure review</title>
+<style>
+:root{color-scheme:light;--bg:#f7f7f5;--ink:#202423;--muted:#67706b;--line:#e3e5e0;--red:#c73342;--cyan:#007e99}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,sans-serif}
+main{max-width:1440px;margin:auto;padding:28px}h1{font-size:27px;letter-spacing:-.8px;margin:0}p{margin:5px 0}.muted{color:var(--muted)}
+.top,.toolbar,.legend{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.top{justify-content:space-between;margin-bottom:18px}
+.badge{border:1px solid #f2cbd0;background:#fff0f1;color:var(--red);padding:7px 13px;border-radius:30px;font-weight:600}
+.card{background:white;border:1px solid var(--line);border-radius:24px;padding:20px;margin:15px 0}
+button,select{font:inherit;border:1px solid #d9ddd7;background:white;border-radius:13px;padding:10px 14px;color:var(--ink)}
+button{cursor:pointer}button:hover{background:#edf1ec}button:disabled{opacity:.35;cursor:default}button:focus-visible,select:focus-visible{outline:3px solid #98c7bf}
+select{max-width:100%;flex:1;min-width:260px}.primary{background:#202c27;color:white}.primary:hover{background:#34483d}
+#position{font-variant-numeric:tabular-nums;min-width:160px;text-align:center}.legend{font-size:13px;margin-top:12px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}.red{background:var(--red)}.cyan{background:var(--cyan)}
+canvas#scene{display:block;width:100%;height:auto;background:#eeeee9;border-radius:15px;margin-top:12px}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.metric{border:1px solid var(--line);border-radius:18px;padding:16px}.metric strong{font-size:25px;display:block;margin:5px 0}.fail{color:var(--red)}.pass{color:#26714f}
+.eyebrow{font-size:11px;letter-spacing:1.3px;font-weight:650;text-transform:uppercase}.crops{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.crops canvas{width:100%;height:auto;max-height:200px;object-fit:contain;background:#eee;border-radius:14px}
+.crops p{font-size:13px}pre{white-space:pre-wrap;word-break:break-word;font-size:12px;background:#f7f7f5;border-radius:14px;padding:15px}details{margin-top:15px}
+@media(max-width:750px){main{padding:15px}.metrics,.crops{grid-template-columns:1fr}h1{font-size:23px}.card{padding:14px}}
+</style>
+<main>
+<header class="top"><div><div class="eyebrow muted">LDO / Saved evidence</div><h1>Geometry failure review</h1><p class="muted">SuperPoint + LightGlue · confidence 0.3 · TartanAir OldTownFall</p></div><div class="badge" id="total"></div></header>
+<p class="muted" id="scope"></p>
+<section class="card">
+<div class="toolbar"><button id="prevPair">← Previous image pair</button><select id="pair" aria-label="Image pair"></select><button id="nextPair">Next image pair →</button></div>
+<div class="toolbar" style="margin-top:12px"><button id="prev">← Previous failure</button><strong id="position"></strong><button id="next" class="primary">Next failure →</button><span class="muted">← / → navigate failures · Shift + arrows change image pair</span></div>
+<p id="pairInfo" class="muted" style="margin-top:14px"></p>
+<canvas id="scene" width="1304" height="530" aria-label="Current image and historical image with the selected failed match"></canvas>
+<div class="legend"><span><i class="dot red"></i>Red: actual LDO match</span><span><i class="dot cyan"></i>Cyan cross: expected historical pixel from ground-truth depth and poses</span><span>Dashed cyan line: forward reprojection discrepancy</span></div>
+<p class="muted" id="projectionNote"></p>
+</section>
+<section class="card"><div class="metrics"><div class="metric"><span class="eyebrow muted">XYZ disagreement</span><strong id="xyz"></strong><span id="xyzGate"></span></div><div class="metric"><span class="eyebrow muted">Symmetric reprojection</span><strong id="pixel"></strong><span id="pixelGate"></span></div><div class="metric"><span class="eyebrow muted">Reference depth</span><strong id="depth"></strong><span>Current / historical · dataset depth maps</span></div></div><p id="explanation" style="margin-top:15px"></p></section>
+<section class="card"><div class="eyebrow muted">Detail · same scale around each pixel</div><div class="crops"><div><p>Current feature selected by LDO</p><canvas id="cropQ" width="200" height="160"></canvas></div><div><p>Historical feature selected by LDO</p><canvas id="cropH" width="200" height="160"></canvas></div><div><p>Reference-predicted historical location</p><canvas id="cropExpected" width="200" height="160"></canvas></div></div><p class="muted">The reference location is an evaluation prediction. It is not a new match produced by LDO; occlusion can also affect visibility.</p>
+<details><summary>Technical evidence</summary><pre id="evidence"></pre><button id="copy">Copy selected failure</button><span id="copyStatus" role="status"></span></details></section>
+<p class="muted">Only saved contradicted matches are shown. Unknown matches are excluded. Reference inputs stay outside the detector; no model or verdict is changed by this viewer.</p>
+</main>
+<script type="application/json" id="data">__REVIEW_DATA__</script>
+<script>
+'use strict';
+const data=JSON.parse(document.getElementById('data').textContent), $=id=>document.getElementById(id);
+let p=0,f=0,epoch=0,selectedEvidence='';const cache=new Map();
+const total=data.pairs.reduce((n,row)=>n+row.matches.length,0), validPoint=pt=>pt&&pt.every(Number.isFinite);
+const fmt=(n,d=2)=>Number.isFinite(n)?n.toFixed(d):'Unavailable';
+$('total').textContent=`${total.toLocaleString()} failed feature matches`;
+$('scope').textContent=`Scope: ${data.analyzed_pairs} candidate image pairs from the four diagnosed weak events; ${data.pairs.length} pairs contain failures. This is a focused diagnosis, not every failure in the full benchmark.`;
+data.pairs.forEach((row,i)=>{const option=document.createElement('option');option.value=i;option.textContent=`${i+1}. ${row.trajectory} · ${(row.query_ns/1e9).toFixed(2)}s ↔ ${(row.history_ns/1e9).toFixed(2)}s · ${row.matches.length} failures`;$('pair').append(option)});
+function load(id){if(!cache.has(id))cache.set(id,new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(new Error('Saved image could not load'));img.src=data.images[id].src}));return cache.get(id)}
+function marker(ctx,pt,color,cross=false){ctx.strokeStyle=color;ctx.lineWidth=3;ctx.beginPath();if(cross){ctx.moveTo(pt[0]-9,pt[1]);ctx.lineTo(pt[0]+9,pt[1]);ctx.moveTo(pt[0],pt[1]-9);ctx.lineTo(pt[0],pt[1]+9)}else{ctx.arc(pt[0],pt[1],8,0,Math.PI*2)}ctx.stroke()}
+function crop(id,img,pt,color){const canvas=$(id),ctx=canvas.getContext('2d');ctx.fillStyle='#eeeee9';ctx.fillRect(0,0,200,160);if(!validPoint(pt)||pt[0]<0||pt[0]>=img.width||pt[1]<0||pt[1]>=img.height){ctx.fillStyle='#67706b';ctx.font='13px system-ui';ctx.fillText('Outside view / unavailable',14,82);return}ctx.imageSmoothingEnabled=false;ctx.drawImage(img,pt[0]-40,pt[1]-32,80,64,0,0,200,160);marker(ctx,[100,80],color)}
+async function render(){const token=++epoch,row=data.pairs[p],m=row.matches[f];$('pair').value=p;const global=data.pairs.slice(0,p).reduce((n,r)=>n+r.matches.length,0)+f+1;
+$('position').textContent=`Failure ${global} / ${total}`;$('prev').disabled=p===0&&f===0;$('next').disabled=p===data.pairs.length-1&&f===row.matches.length-1;$('prevPair').disabled=p===0;$('nextPair').disabled=p===data.pairs.length-1;
+$('pairInfo').textContent=`${row.trajectory} · Current ${(row.query_ns/1e9).toFixed(2)}s / historical ${(row.history_ns/1e9).toFixed(2)}s · Failure ${f+1}/${row.matches.length} in this pair · All matches: ${row.counts.supported} supported, ${row.counts.contradicted} contradicted, ${row.counts.untestable} unknown`;
+const xyzFail=!Number.isFinite(m.xyz_error_m)||m.xyz_error_m>m.xyz_gate_m,pixelFail=!Number.isFinite(m.pixel_error)||m.pixel_error>data.policy.feature_pixel_tolerance;
+$('xyz').textContent=`${fmt(m.xyz_error_m,3)} m`;$('xyz').className=xyzFail?'fail':'pass';$('xyzGate').textContent=`Tolerance: ${fmt(m.xyz_gate_m,3)} m · ${xyzFail?'FAIL':'within tolerance'}`;
+$('pixel').textContent=`${fmt(m.pixel_error)} px`;$('pixel').className=pixelFail?'fail':'pass';$('pixelGate').textContent=`Tolerance: ${data.policy.feature_pixel_tolerance} px · maximum of forward and reverse errors`;
+$('depth').textContent=`${fmt(m.query_depth_m)} / ${fmt(m.historical_depth_m)} m`;
+$('explanation').textContent=`Saved verdict: contradicted. ${xyzFail?'The two selected pixels reconstruct to inconsistent 3D positions. ':''}${pixelFail?'Their reference-predicted image positions disagree with the selected pixels. ':''}Both XYZ and bidirectional reprojection must pass to support a match.`;
+selectedEvidence=JSON.stringify({model:'LDO-MegaLoc-LightGlue, confidence 0.3',dataset:'TartanAir OldTownFall',trajectory:row.trajectory,query_ns:row.query_ns,history_ns:row.history_ns,verdict:'contradicted',...m,pixel_gate:data.policy.feature_pixel_tolerance,source_evidence:row.evidence,evidence_sha256:row.evidence_sha256,results_sha256:data.results_sha256},null,2);$('evidence').textContent=selectedEvidence;$('copyStatus').textContent='';
+try{const [qi,hi]=await Promise.all([load(row.query_image),load(row.history_image)]);if(token!==epoch)return;const gap=24,top=34,canvas=$('scene');canvas.width=qi.width+hi.width+gap;canvas.height=Math.max(qi.height,hi.height)+top;const ctx=canvas.getContext('2d');ctx.fillStyle='#eeeee9';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#202423';ctx.font='15px system-ui';ctx.fillText('CURRENT IMAGE',12,23);ctx.fillText('HISTORICAL IMAGE',qi.width+gap+12,23);ctx.drawImage(qi,0,top);ctx.drawImage(hi,qi.width+gap,top);
+const a=[m.query[0],m.query[1]+top],b=[m.historical[0]+qi.width+gap,m.historical[1]+top];ctx.strokeStyle='#c73342';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(...a);ctx.lineTo(...b);ctx.stroke();marker(ctx,a,'#c73342');marker(ctx,b,'#c73342');
+const expected=m.expected_history,inside=validPoint(expected)&&expected[0]>=0&&expected[0]<hi.width&&expected[1]>=0&&expected[1]<hi.height;
+ctx.save();ctx.beginPath();ctx.rect(qi.width+gap,top,hi.width,hi.height);ctx.clip();if(validPoint(expected)){const e=[expected[0]+qi.width+gap,expected[1]+top];ctx.strokeStyle='#007e99';ctx.setLineDash([6,5]);ctx.beginPath();ctx.moveTo(...b);ctx.lineTo(...e);ctx.stroke();ctx.setLineDash([]);if(inside)marker(ctx,e,'#007e99',true)}ctx.restore();
+const forward=validPoint(expected)?Math.hypot(expected[0]-m.historical[0],expected[1]-m.historical[1]):null;
+$('projectionNote').textContent=`Forward discrepancy shown here: ${fmt(forward)} px. ${inside?'':'Reference prediction is outside the historical image or behind the camera; its cross cannot be shown. '}The reported symmetric error also checks the reverse direction.`;
+crop('cropQ',qi,m.query,'#c73342');crop('cropH',hi,m.historical,'#c73342');crop('cropExpected',hi,expected,'#007e99');
+}catch(error){$('projectionNote').textContent=error.message}}
+function move(step){if(step>0){if(f+1<data.pairs[p].matches.length)f++;else if(p+1<data.pairs.length){p++;f=0}else return}else{if(f>0)f--;else if(p>0){p--;f=data.pairs[p].matches.length-1}else return}render()}
+function movePair(step){const next=p+step;if(next<0||next>=data.pairs.length)return;p=next;f=0;render()}
+$('prev').onclick=()=>move(-1);$('next').onclick=()=>move(1);$('prevPair').onclick=()=>movePair(-1);$('nextPair').onclick=()=>movePair(1);$('pair').onchange=e=>{p=Number(e.target.value);f=0;render()};
+document.addEventListener('keydown',e=>{if(e.target.tagName==='SELECT'||e.target.tagName==='INPUT')return;if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();const step=e.key==='ArrowRight'?1:-1;if(e.shiftKey)movePair(step);else move(step)}});
+$('copy').onclick=async()=>{try{await navigator.clipboard.writeText(selectedEvidence);$('copyStatus').textContent=' Copied'}catch{$('copyStatus').textContent=' Select and copy the evidence text above'}};
+render();
+</script>
+</html>

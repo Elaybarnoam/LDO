@@ -17,6 +17,30 @@ def _cell(value) -> str:
 
 def render_report(report: dict, json_name: str, artifact_name: str) -> str:
     if "comparison_result" in report:
+        if "descriptor_analysis" in report["comparison_result"]:
+            from tasks.descriptor_analysis.report import render
+
+            return render(report["comparison_result"]["descriptor_analysis"])
+        if "matching_diagnostics" in report["comparison_result"]:
+            from tasks.matching_diagnostics.report import render
+
+            return render(report["comparison_result"]["matching_diagnostics"])
+        if "matching_optimization" in report["comparison_result"]:
+            from tasks.matching_optimization.report import render
+
+            return render(report["comparison_result"]["matching_optimization"])
+        if "reference_depth_v2" in report["comparison_result"]:
+            from tasks.reference_depth_v2.report import render
+
+            return render(report["comparison_result"]["reference_depth_v2"])
+        if "unseen_tartanair" in report["comparison_result"]:
+            from tasks.unseen_tartanair.report import render
+
+            return render(report["comparison_result"]["unseen_tartanair"])
+        if "optimization" in report["comparison_result"]:
+            from tasks.optimization.report import render
+
+            return render(report["comparison_result"]["optimization"])
         from tasks.loop_closure.comparison.comparison import render_comparison
 
         return render_comparison(report["comparison_result"])

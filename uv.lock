@@ -960,6 +960,9 @@ ldo = [
     { name = "torch" },
     { name = "torchvision" },
 ]
+visualization = [
+    { name = "matplotlib" },
+]
 
 [package.dev-dependencies]
 dev = [
@@ -971,6 +974,7 @@ dev = [
 requires-dist = [
     { name = "huggingface-hub", marker = "extra == 'ldo'", specifier = "==2.1.1" },
     { name = "lightglue", marker = "extra == 'ldo'", git = "https://github.com/cvg/LightGlue.git?rev=eb42fee2d71449efb0aa5c10549752b5d75384d8" },
+    { name = "matplotlib", marker = "extra == 'visualization'", specifier = ">=3.9,<4" },
     { name = "numpy" },
     { name = "opencv-python", marker = "sys_platform == 'win32'" },
     { name = "opencv-python-headless", marker = "sys_platform != 'win32'" },
@@ -982,7 +986,7 @@ requires-dist = [
     { name = "torchvision", marker = "extra == 'ldo'", specifier = "==0.26.0", index = "https://download.pytorch.org/whl/cu128" },
     { name = "tzdata" },
 ]
-provides-extras = ["ldo"]
+provides-extras = ["visualization", "ldo"]
 
 [package.metadata.requires-dev]
 dev = [

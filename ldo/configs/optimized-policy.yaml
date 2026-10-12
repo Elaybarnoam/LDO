@@ -1,0 +1,14 @@
+version: 1
+variant: LDO-MegaLoc-LightGlue-ConfidencePolicy
+model_root: /opt/loop-detector/ldo-models
+device: cuda
+retrieval: megaloc
+matching: superpoint_lightglue
+policy: candidate_confidence
+top_k: 5
+temporal_exclusion_seconds: 5
+maximum_keypoints: 1024
+cache_size: 128
+match_threshold: 0.3
+seed: 0
+policy_parameters: candidate-confidence.json

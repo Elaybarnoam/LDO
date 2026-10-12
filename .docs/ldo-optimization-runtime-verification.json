@@ -1,0 +1,79 @@
+{
+  "passed": true,
+  "trajectory": "P000",
+  "candidate_count": 130,
+  "feature_count": 37630,
+  "confidence_only_candidate_count": 209,
+  "confidence_only_feature_count": 40529,
+  "model_manifest": {
+    "architecture": "LDO",
+    "variant": "LDO-MegaLoc-LightGlue-ConfidencePolicy",
+    "installation": {
+      "pins": {
+        "megaloc": {
+          "repository": "https://github.com/gmberton/MegaLoc",
+          "revision": "5fe0dd697c4a70ba3e23607f6716ab3c606b16db"
+        },
+        "lightglue": {
+          "repository": "https://github.com/cvg/LightGlue",
+          "revision": "eb42fee2d71449efb0aa5c10549752b5d75384d8"
+        },
+        "megaloc_weights": {
+          "repository": "gberton/MegaLoc",
+          "revision": "a0f34722c4297ff787e022433799250180860af7",
+          "filename": "model.safetensors"
+        }
+      },
+      "artifacts": {
+        "MegaLoc/megaloc_model.py": "e3a66ae823abbbbc5e7975c649419a33036400eaa9fa5a955dd97eaa37f46c75",
+        "MegaLoc/LICENSE": "0a906f9a65db6f645483f6cbf56b01e20615b9b943df3f70112f3d0fe0521e2a",
+        "weights/megaloc.safetensors": "d4f9f2bcb60018f91eb6a8e061ed054fd55654e10c2569cf13841ea986ffb4f8",
+        "LightGlue/lightglue/__init__.py": "cf4322abb908f69282198931fb23c09a1ef1101b066d57842402e6436a92eaa3",
+        "LightGlue/lightglue/aliked.py": "60b24397c52e8a08d838828967cd03f5d6066c1f7c3c433805bf11dcb0d5228e",
+        "LightGlue/lightglue/disk.py": "386583f7ad0011d0574bd1039b18d9b7fdc94b9221279b79adaa6179240bdfa4",
+        "LightGlue/lightglue/dog_hardnet.py": "54525b5b0bc347c53f5d363892f085347069c6ede68d260d234824cb426b0b2d",
+        "LightGlue/lightglue/lightglue.py": "dcb75b9cad1985c5e7a537c512d4318d47fbcc99df75b39a513de60e027c039f",
+        "LightGlue/lightglue/sift.py": "9fa24851ff25b6f09cb06fa62aed1d07fa9cb6aa340c79d6467b3bdfdd4508cd",
+        "LightGlue/lightglue/superpoint.py": "23e8a26137b44f37e9a319313822c5b38d9c55796e756202eb46d64f1979d2b0",
+        "LightGlue/lightglue/utils.py": "c6d9260656a24d826128b68c95d0b7798106d04f4244a77f3b1856573f58e690",
+        "LightGlue/lightglue/viz2d.py": "142195bd74971bbfb8de871e731d412b7a505c2a7389ca8f5d0f29af2a3701e7",
+        "LightGlue/LICENSE": "0e6031ed3e62dc91dc8b1c8f240abd200b1083f60773362e64e339fe01d1bf18",
+        "torch/checkpoints/superpoint_v1.pth": "52b6708629640ca883673b5d5c097c4ddad37d8048b33f09c8ca0d69db12c40e",
+        "torch/checkpoints/superpoint_lightglue_v0-1_arxiv.pth": "6ff7040d0a497fc6639337946d7538dae07428c18f77a067a0b5a960e7cc551a"
+      },
+      "python": "/opt/loop-detector/ldo-env/bin/python",
+      "licenses": {
+        "MegaLoc": "MIT",
+        "LightGlue": "Apache-2.0",
+        "SuperPoint": "Separate restrictive upstream research license"
+      }
+    },
+    "representation_fingerprint": "4e73766c225e60b29e3152b56469779b26a6dbb7f2274781666072c69b2662e7",
+    "matching_fingerprint": "3fd67a11b6f3b1f729ff4b4ae14d45e0d5718f52630991755b0c82b9314b8039",
+    "local_feature_fingerprint": "f9e23fdd7e0cba250eec00b158515e582997b97b09cd3e312aa328ea4e775de4",
+    "device": "cuda",
+    "seed": 0,
+    "match_threshold": 0.3,
+    "maximum_keypoints": 1024,
+    "matcher_checkpoint_sha256": null,
+    "matcher_full_depth": false,
+    "policy": "candidate_confidence",
+    "policy_parameters_sha256": "ce8d56d2bd87672187788fe5f2a10e58a16df6668b27b0398800965abf7af046",
+    "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "packages": {
+      "torch": "2.11.0+cu128",
+      "torchvision": "0.26.0+cu128",
+      "numpy": "2.4.6",
+      "lightglue": "0.0",
+      "safetensors": "0.8.0"
+    },
+    "manifest_id": "ec63aaff7fff36cf070688c9c2ea9e084ecf841fa1b59c38eaf9e2694a6de02c"
+  },
+  "checks": [
+    "image-only runtime",
+    "candidate identity parity",
+    "consecutive ranks",
+    "original assignment ID parity",
+    "confidence parity within 1e-6"
+  ]
+}

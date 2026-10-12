@@ -129,6 +129,10 @@ def aggregate(sequences, k):
 
 
 def render(task):
+    if task.get("mode") == "reference_features":
+        from .direct_report import render as render_features
+
+        return render_features(task)
     task = {
         **task,
         "aggregate": aggregate(task["sequences"], task["manifest"]["protocol"]["top_k"]),

@@ -1,0 +1,8 @@
+version: 1
+source_root: /opt/loop-detector/experiments/matching_optimization
+diagnosis_root: /opt/loop-detector/experiments/matching_diagnostics/v1
+artifact_root: /opt/loop-detector/experiments/descriptor_analysis/v1
+development_roles: [fit, validate]
+rank_budgets: [1, 5, 10, 50]
+cosine_tie_tolerance: 0.0000001
+minimum_correct_matches_per_pair: 20

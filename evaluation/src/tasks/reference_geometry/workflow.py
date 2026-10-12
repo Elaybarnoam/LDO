@@ -9,17 +9,11 @@ from uuid import uuid4
 import numpy as np
 
 from ldo.configuration import build_detector, load_config
-from loop_verification.configuration import load_policy
-from loop_verification.contracts import VerificationInput
-from loop_verification.stereo_depth import StereoDepth, load_stereo_policy
-from loop_verification.verifier import LoopVerifier
 from tasks.loop_closure.comparison.cli import publish_report
 from tasks.loop_closure.comparison.metrics import read_trace
 from tasks.loop_closure.comparison.reference import sha256, write_json
-from tasks.loop_closure.pose_assessment import assess_pose
 from tasks.loop_closure.revisits.metrics import build_events, evaluate, paired_event_uncertainty
 from tasks.loop_closure.revisits.operating_points import select
-from tasks.loop_closure.verification import load_assessment
 
 from .dataset import audit_stereo, frames, prepare_sequence
 from .depth_coverage import summarize as depth_coverage
@@ -110,6 +104,21 @@ def _reference(path):
 
 
 def run(config, config_path, prepared=None):
+    """Default experiment evaluates detector correspondences directly with references."""
+    from .direct import run as run_direct
+
+    return run_direct(config, config_path, prepared)
+
+
+def run_pipeline(config, config_path, prepared=None):
+    """Optional, separate observation-stereo and operational-verifier experiment."""
+    from loop_verification.configuration import load_policy
+    from loop_verification.contracts import VerificationInput
+    from loop_verification.stereo_depth import StereoDepth, load_stereo_policy
+    from loop_verification.verifier import LoopVerifier
+    from tasks.loop_closure.pose_assessment import assess_pose
+    from tasks.loop_closure.verification import load_assessment
+
     prepared = prepared or prepare(config, config_path)
     manifest = json.loads((prepared / "manifest.json").read_text())
     if (

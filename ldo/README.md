@@ -33,7 +33,31 @@ For reusable, integrity-checked stereo cache evidence, set `LDO_STEREO_CACHE_SOU
 
 Index fingerprints reject descriptors from a different model/preprocessing space. Local caches are bounded and hold CPU arrays. Historical descriptors use a geometrically growing contiguous float32 allocation. Frames are queried before insertion; temporal eligibility is applied before selecting top K. Failures do not insert partially processed keyframes.
 
-Current raw camera coordinates are preserved by disabling local resizing. Every reported assignment is saved, including scores and feature IDs. No temporal RANSAC or grid gate is introduced. The initial proposal policy preserves retrieval rank and exposes local evidence; its scores are not calibrated loop probabilities.
+Features and image sizes always use original camera pixels. Optional `feature_resize` controls extraction resolution; the upstream extractor maps points back to original coordinates before matching or evaluation. Every reported assignment is saved, including scores and feature IDs. No temporal RANSAC or grid gate is introduced. The initial proposal policy preserves retrieval rank and exposes local evidence; its scores are not calibrated loop probabilities.
+
+### Pretrained matching optimization
+
+`ldo/configs/optimized-matching.yaml` selects the configuration frozen by the
+[matching optimization task](../evaluation/src/tasks/matching_optimization/README.md).
+The selected model uses SuperPoint with 1,024 keypoints, native resolution and
+adaptive LightGlue at confidence 0.4. The previous confidence-0.3 configuration
+remains in `optimized-confidence.yaml`.
+
+On the fresh test, 0.4 removes 17.3% of incorrect feature matches and retains
+96.7% of correct matches, but events with at least 20 correct matches fall from
+13/17 to 12/17. Treat it as experimental; retain 0.3 when event retention is the
+priority. No existing benchmark configuration is switched automatically.
+
+`superpoint_lightglue` and `aliked_lightglue` are interchangeable matching adapters.
+ALIKED uses its own extractor and compatible pretrained LightGlue weights;
+descriptor families cannot be mixed. `build_pair_engine` constructs the same
+production matching adapter without loading retrieval, allowing identical-pair
+experiments. Neither adapter receives reference depth or poses.
+
+The task tests confidence, inference depth, keypoint count, resolution and ALIKED
+sequentially, then evaluates the frozen choice on fresh OldTownFall trajectories.
+See the [protocol](../.docs/ldo-matching-optimization-plan.md) and
+[recorded results](../.docs/ldo-matching-optimization-results.md).
 
 ## Results and review
 

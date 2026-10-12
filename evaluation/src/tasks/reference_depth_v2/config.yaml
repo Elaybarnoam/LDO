@@ -1,0 +1,8 @@
+version: 2
+source: evaluation/output/unseen_tartanair/results.json
+asset_root: /opt/loop-detector/experiments/reference_depth_v2/assets
+artifact_root: /opt/loop-detector/experiments/reference_depth_v2
+depth_edge_relative_tolerance: 0.05
+feature_pixel_tolerance: 3.0
+feature_xyz_tolerance_m: 0.05
+feature_xyz_relative_tolerance: 0.005

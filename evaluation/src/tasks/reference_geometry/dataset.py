@@ -28,12 +28,17 @@ def prepare_sequence(settings, trajectory, output, stride):
         raise ValueError("Camera timestamps differ from actual source frames")
     stamps = np.rint((cam_times - cam_times[0]) * 1e9).astype(np.int64) + 1_000_000_000
     output.mkdir(parents=True, exist_ok=False)
+    cameras = (
+        (("cam0", "lcam_front"),)
+        if settings.get("reference_only")
+        else (("cam0", "lcam_front"), ("cam1", "rcam_front"))
+    )
     frame_rows = []
     for i in range(0, len(images), stride):
         if int(images[i].name.split("_")[0]) != i:
             raise ValueError("Source image indices are not contiguous")
         stamp = int(stamps[i])
-        for camera, side in (("cam0", "lcam_front"), ("cam1", "rcam_front")):
+        for camera, side in cameras:
             original = source / f"image_{side}" / f"{i:06d}_{side}.png"
             gray = cv2.imread(str(original), cv2.IMREAD_GRAYSCALE)
             if gray is None or gray.shape != (640, 640):
@@ -49,16 +54,22 @@ def prepare_sequence(settings, trajectory, output, stride):
                 "timestamp_ns": stamp,
                 "source_index": i,
                 "image": str(output / "mav0/cam0/data" / f"{stamp}.png"),
-                "right_image": str(output / "mav0/cam1/data" / f"{stamp}.png"),
+                "right_image": str(output / "mav0/cam1/data" / f"{stamp}.png")
+                if len(cameras) == 2
+                else None,
                 "depth": str(depth),
                 "pose": camera_pose(poses[i]).tolist(),
                 "image_sha256": sha256(output / "mav0/cam0/data" / f"{stamp}.png"),
                 "depth_sha256": sha256(depth),
-                "right_image_sha256": sha256(output / "mav0/cam1/data" / f"{stamp}.png"),
+                "right_image_sha256": sha256(output / "mav0/cam1/data" / f"{stamp}.png")
+                if len(cameras) == 2
+                else None,
                 "source_image_sha256": sha256(images[i]),
             }
         )
-    for camera, offset in (("cam0", 0.0), ("cam1", 0.25)):
+    for camera, offset in (
+        (("cam0", 0.0),) if len(cameras) == 1 else (("cam0", 0.0), ("cam1", 0.25))
+    ):
         directory = output / "mav0" / camera
         t = np.eye(4)
         t[:3, :3] = CV_TO_NED
@@ -94,7 +105,9 @@ def prepare_sequence(settings, trajectory, output, stride):
         "imu_gyro_sha256": sha256(source / "imu/gyro.npy"),
         "root": str(output),
         "source": str(source),
-        "inputs": "identical_grayscale_stereo; detectors_currently_use_cam0_only",
+        "inputs": "identical_grayscale_cam0; reference_only"
+        if len(cameras) == 1
+        else "identical_grayscale_stereo; detectors_currently_use_cam0_only",
         "reference_data_are_detector_inputs": False,
     }
 

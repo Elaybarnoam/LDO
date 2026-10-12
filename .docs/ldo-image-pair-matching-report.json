@@ -1,0 +1,605 @@
+{
+  "schema_version": 1,
+  "run_id": "351d65788ba14fa3a9c2e5ef83a1d3b2",
+  "started_at": "2026-10-10T20:08:28.587352+03:00",
+  "timezone": "Asia/Jerusalem",
+  "comparison_config_sha256": "9c870bf6ff9eb308659d18bc4eb7198615181bd89cdd57765732dfa8d5ffdb69",
+  "status": "completed",
+  "cases": [
+    {
+      "benchmark_id": "comparison",
+      "status": "completed",
+      "event_count": 1,
+      "event_counts": {
+        "comparison_result": 1
+      },
+      "proposal_count": 0,
+      "geometric_acceptance_count": 0,
+      "constraint_count": 0,
+      "loop_query_count": 0,
+      "eligible_loop_query_count": 0,
+      "geometric_rejection_count": 0,
+      "loop_decision_count": 0,
+      "detected_loop_count": 0,
+      "rejection_reasons": {},
+      "verification_gates": {},
+      "solver_diagnostics": {},
+      "candidate_selection": {},
+      "retrieval_count": 0,
+      "empty_loop_retrieval_count": 0,
+      "detection_metrics": {
+        "tp": null,
+        "fp": null,
+        "fn": null,
+        "precision": null,
+        "recall": null,
+        "availability_reason": "Independent loop labels and evaluator are not configured"
+      },
+      "benchmark_type": "controlled_comparison"
+    }
+  ],
+  "events_file": "/mnt/c/Users/elayb/OneDrive/Documents/visual\u2013IMU loop detector/evaluation/output/comparison_2026-10-10_20-08-28_587352_351d6578/events.jsonl",
+  "comparison_result": {
+    "sequence": "LDO-MegaLoc-EfficientLoFTR-Trial",
+    "matching_optimization": {
+      "artifact_root": "/opt/loop-detector/experiments/image_pair_matching/v1",
+      "test": null,
+      "development": {
+        "steps": [
+          {
+            "step": "EfficientLoFTR preliminary pair gate; production promotion pending",
+            "fit_selected": "67f8fc63645fb533",
+            "promoted": false,
+            "selected_after_step": "67f8fc63645fb533"
+          }
+        ],
+        "variants": [
+          {
+            "id": "67f8fc63645fb533",
+            "variant": {
+              "family": "superpoint",
+              "keypoints": 1024,
+              "resize": null,
+              "full_depth": false,
+              "threshold": 0.3
+            },
+            "fit": {
+              "overall": {
+                "supported": 28748,
+                "contradicted": 44145,
+                "untestable": 16600,
+                "pairs": 560,
+                "positive_pairs": 224,
+                "usable_positive_pairs": 181,
+                "precision": 0.3943862922365659,
+                "coverage": 0.8145106321164783,
+                "by_pair_label": {
+                  "non_loop": {
+                    "supported": 1488,
+                    "contradicted": 9906,
+                    "untestable": 2612
+                  },
+                  "loop": {
+                    "supported": 24525,
+                    "contradicted": 24616,
+                    "untestable": 7405
+                  },
+                  "unknown": {
+                    "supported": 2735,
+                    "contradicted": 9623,
+                    "untestable": 6583
+                  }
+                }
+              },
+              "scenes": {
+                "AbandonedFactory2": {
+                  "supported": 23428,
+                  "contradicted": 31876,
+                  "untestable": 8089,
+                  "pairs": 320,
+                  "positive_pairs": 128,
+                  "usable_positive_pairs": 117,
+                  "precision": 0.4236221611456676,
+                  "coverage": 0.8723991607906235,
+                  "by_pair_label": {
+                    "non_loop": {
+                      "supported": 1423,
+                      "contradicted": 8934,
+                      "untestable": 2174
+                    },
+                    "loop": {
+                      "supported": 19619,
+                      "contradicted": 15138,
+                      "untestable": 4051
+                    },
+                    "unknown": {
+                      "supported": 2386,
+                      "contradicted": 7804,
+                      "untestable": 1864
+                    }
+                  }
+                },
+                "DesertGasStation": {
+                  "supported": 5320,
+                  "contradicted": 12269,
+                  "untestable": 8511,
+                  "pairs": 240,
+                  "positive_pairs": 96,
+                  "usable_positive_pairs": 64,
+                  "precision": 0.3024617658764,
+                  "coverage": 0.6739080459770115,
+                  "by_pair_label": {
+                    "unknown": {
+                      "supported": 349,
+                      "contradicted": 1819,
+                      "untestable": 4719
+                    },
+                    "non_loop": {
+                      "supported": 65,
+                      "contradicted": 972,
+                      "untestable": 438
+                    },
+                    "loop": {
+                      "supported": 4906,
+                      "contradicted": 9478,
+                      "untestable": 3354
+                    }
+                  }
+                }
+              }
+            },
+            "validate": {
+              "overall": {
+                "supported": 13360,
+                "contradicted": 20845,
+                "untestable": 6801,
+                "pairs": 320,
+                "positive_pairs": 128,
+                "usable_positive_pairs": 104,
+                "precision": 0.3905861716123374,
+                "coverage": 0.8341462225040238,
+                "by_pair_label": {
+                  "non_loop": {
+                    "supported": 317,
+                    "contradicted": 5506,
+                    "untestable": 1487
+                  },
+                  "unknown": {
+                    "supported": 1004,
+                    "contradicted": 4027,
+                    "untestable": 2048
+                  },
+                  "loop": {
+                    "supported": 12039,
+                    "contradicted": 11312,
+                    "untestable": 3266
+                  }
+                }
+              },
+              "scenes": {
+                "AbandonedFactory2": {
+                  "supported": 10052,
+                  "contradicted": 14176,
+                  "untestable": 3714,
+                  "pairs": 160,
+                  "positive_pairs": 64,
+                  "usable_positive_pairs": 61,
+                  "precision": 0.414891860657091,
+                  "coverage": 0.8670818123255315,
+                  "by_pair_label": {
+                    "non_loop": {
+                      "supported": 189,
+                      "contradicted": 4631,
+                      "untestable": 1198
+                    },
+                    "unknown": {
+                      "supported": 843,
+                      "contradicted": 3126,
+                      "untestable": 832
+                    },
+                    "loop": {
+                      "supported": 9020,
+                      "contradicted": 6419,
+                      "untestable": 1684
+                    }
+                  }
+                },
+                "DesertGasStation": {
+                  "supported": 3308,
+                  "contradicted": 6669,
+                  "untestable": 3087,
+                  "pairs": 160,
+                  "positive_pairs": 64,
+                  "usable_positive_pairs": 43,
+                  "precision": 0.3315625939661221,
+                  "coverage": 0.7637017758726271,
+                  "by_pair_label": {
+                    "loop": {
+                      "supported": 3019,
+                      "contradicted": 4893,
+                      "untestable": 1582
+                    },
+                    "non_loop": {
+                      "supported": 128,
+                      "contradicted": 875,
+                      "untestable": 289
+                    },
+                    "unknown": {
+                      "supported": 161,
+                      "contradicted": 901,
+                      "untestable": 1216
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "efficientloftr-native-full-0.2-1024",
+            "variant": {
+              "engine": "efficientloftr",
+              "precision": "fp32",
+              "resize": null,
+              "threshold": 0.2,
+              "maximum_matches": 1024
+            },
+            "fit": {
+              "overall": {
+                "supported": 123581,
+                "contradicted": 160361,
+                "untestable": 79768,
+                "pairs": 560,
+                "positive_pairs": 224,
+                "usable_positive_pairs": 197,
+                "precision": 0.43523325186129563,
+                "coverage": 0.7806824118116081,
+                "by_pair_label": {
+                  "non_loop": {
+                    "supported": 5914,
+                    "contradicted": 59513,
+                    "untestable": 16067
+                  },
+                  "loop": {
+                    "supported": 106396,
+                    "contradicted": 57450,
+                    "untestable": 36118
+                  },
+                  "unknown": {
+                    "supported": 11271,
+                    "contradicted": 43398,
+                    "untestable": 27583
+                  }
+                }
+              },
+              "scenes": {
+                "AbandonedFactory2": {
+                  "supported": 88994,
+                  "contradicted": 116099,
+                  "untestable": 40178,
+                  "pairs": 320,
+                  "positive_pairs": 128,
+                  "usable_positive_pairs": 125,
+                  "precision": 0.4339202215580249,
+                  "coverage": 0.8361893578939215,
+                  "by_pair_label": {
+                    "non_loop": {
+                      "supported": 5776,
+                      "contradicted": 45906,
+                      "untestable": 11474
+                    },
+                    "loop": {
+                      "supported": 73383,
+                      "contradicted": 34751,
+                      "untestable": 18932
+                    },
+                    "unknown": {
+                      "supported": 9835,
+                      "contradicted": 35442,
+                      "untestable": 9772
+                    }
+                  }
+                },
+                "DesertGasStation": {
+                  "supported": 34587,
+                  "contradicted": 44262,
+                  "untestable": 39590,
+                  "pairs": 240,
+                  "positive_pairs": 96,
+                  "usable_positive_pairs": 72,
+                  "precision": 0.4386485561009017,
+                  "coverage": 0.6657351041464382,
+                  "by_pair_label": {
+                    "unknown": {
+                      "supported": 1436,
+                      "contradicted": 7956,
+                      "untestable": 17811
+                    },
+                    "non_loop": {
+                      "supported": 138,
+                      "contradicted": 13607,
+                      "untestable": 4593
+                    },
+                    "loop": {
+                      "supported": 33013,
+                      "contradicted": 22699,
+                      "untestable": 17186
+                    }
+                  }
+                }
+              }
+            },
+            "validate": {
+              "overall": {
+                "supported": 61216,
+                "contradicted": 77742,
+                "untestable": 45861,
+                "pairs": 320,
+                "positive_pairs": 128,
+                "usable_positive_pairs": 117,
+                "precision": 0.44053598929172844,
+                "coverage": 0.7518599278212738,
+                "by_pair_label": {
+                  "non_loop": {
+                    "supported": 1039,
+                    "contradicted": 26706,
+                    "untestable": 10860
+                  },
+                  "unknown": {
+                    "supported": 4930,
+                    "contradicted": 19154,
+                    "untestable": 13720
+                  },
+                  "loop": {
+                    "supported": 55247,
+                    "contradicted": 31882,
+                    "untestable": 21281
+                  }
+                }
+              },
+              "scenes": {
+                "AbandonedFactory2": {
+                  "supported": 43401,
+                  "contradicted": 50336,
+                  "untestable": 25822,
+                  "pairs": 160,
+                  "positive_pairs": 64,
+                  "usable_positive_pairs": 64,
+                  "precision": 0.46300820380426083,
+                  "coverage": 0.7840229510116344,
+                  "by_pair_label": {
+                    "non_loop": {
+                      "supported": 679,
+                      "contradicted": 20766,
+                      "untestable": 8113
+                    },
+                    "unknown": {
+                      "supported": 4462,
+                      "contradicted": 15116,
+                      "untestable": 6037
+                    },
+                    "loop": {
+                      "supported": 38260,
+                      "contradicted": 14454,
+                      "untestable": 11672
+                    }
+                  }
+                },
+                "DesertGasStation": {
+                  "supported": 17815,
+                  "contradicted": 27406,
+                  "untestable": 20039,
+                  "pairs": 160,
+                  "positive_pairs": 64,
+                  "usable_positive_pairs": 53,
+                  "precision": 0.39395413635257953,
+                  "coverage": 0.6929359485136377,
+                  "by_pair_label": {
+                    "loop": {
+                      "supported": 16987,
+                      "contradicted": 17428,
+                      "untestable": 9609
+                    },
+                    "non_loop": {
+                      "supported": 360,
+                      "contradicted": 5940,
+                      "untestable": 2747
+                    },
+                    "unknown": {
+                      "supported": 468,
+                      "contradicted": 4038,
+                      "untestable": 7683
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "orb": {
+          "fit": {
+            "overall": {
+              "supported": 1642,
+              "contradicted": 3333,
+              "untestable": 6434,
+              "pairs": 560,
+              "positive_pairs": 224,
+              "usable_positive_pairs": 15,
+              "precision": 0.3300502512562814,
+              "coverage": 0.4360592514681392,
+              "by_pair_label": {
+                "non_loop": {
+                  "supported": 34,
+                  "contradicted": 743,
+                  "untestable": 721
+                },
+                "loop": {
+                  "supported": 1520,
+                  "contradicted": 1977,
+                  "untestable": 2562
+                },
+                "unknown": {
+                  "supported": 88,
+                  "contradicted": 613,
+                  "untestable": 3151
+                }
+              }
+            },
+            "scenes": {
+              "AbandonedFactory2": {
+                "supported": 1121,
+                "contradicted": 2320,
+                "untestable": 2638,
+                "pairs": 320,
+                "positive_pairs": 128,
+                "usable_positive_pairs": 8,
+                "precision": 0.3257773902935193,
+                "coverage": 0.5660470472117125,
+                "by_pair_label": {
+                  "non_loop": {
+                    "supported": 33,
+                    "contradicted": 566,
+                    "untestable": 606
+                  },
+                  "loop": {
+                    "supported": 1020,
+                    "contradicted": 1250,
+                    "untestable": 1545
+                  },
+                  "unknown": {
+                    "supported": 68,
+                    "contradicted": 504,
+                    "untestable": 487
+                  }
+                }
+              },
+              "DesertGasStation": {
+                "supported": 521,
+                "contradicted": 1013,
+                "untestable": 3796,
+                "pairs": 240,
+                "positive_pairs": 96,
+                "usable_positive_pairs": 7,
+                "precision": 0.3396349413298566,
+                "coverage": 0.28780487804878047,
+                "by_pair_label": {
+                  "unknown": {
+                    "supported": 20,
+                    "contradicted": 109,
+                    "untestable": 2664
+                  },
+                  "non_loop": {
+                    "supported": 1,
+                    "contradicted": 177,
+                    "untestable": 115
+                  },
+                  "loop": {
+                    "supported": 500,
+                    "contradicted": 727,
+                    "untestable": 1017
+                  }
+                }
+              }
+            }
+          },
+          "validate": {
+            "overall": {
+              "supported": 531,
+              "contradicted": 967,
+              "untestable": 1484,
+              "pairs": 320,
+              "positive_pairs": 128,
+              "usable_positive_pairs": 5,
+              "precision": 0.35447263017356473,
+              "coverage": 0.5023474178403756,
+              "by_pair_label": {
+                "non_loop": {
+                  "supported": 6,
+                  "contradicted": 293,
+                  "untestable": 279
+                },
+                "unknown": {
+                  "supported": 24,
+                  "contradicted": 164,
+                  "untestable": 384
+                },
+                "loop": {
+                  "supported": 501,
+                  "contradicted": 510,
+                  "untestable": 821
+                }
+              }
+            },
+            "scenes": {
+              "AbandonedFactory2": {
+                "supported": 337,
+                "contradicted": 499,
+                "untestable": 959,
+                "pairs": 160,
+                "positive_pairs": 64,
+                "usable_positive_pairs": 3,
+                "precision": 0.40311004784689,
+                "coverage": 0.46573816155988856,
+                "by_pair_label": {
+                  "non_loop": {
+                    "supported": 1,
+                    "contradicted": 170,
+                    "untestable": 192
+                  },
+                  "unknown": {
+                    "supported": 13,
+                    "contradicted": 89,
+                    "untestable": 170
+                  },
+                  "loop": {
+                    "supported": 323,
+                    "contradicted": 240,
+                    "untestable": 597
+                  }
+                }
+              },
+              "DesertGasStation": {
+                "supported": 194,
+                "contradicted": 468,
+                "untestable": 525,
+                "pairs": 160,
+                "positive_pairs": 64,
+                "usable_positive_pairs": 2,
+                "precision": 0.2930513595166163,
+                "coverage": 0.5577085088458298,
+                "by_pair_label": {
+                  "loop": {
+                    "supported": 178,
+                    "contradicted": 270,
+                    "untestable": 224
+                  },
+                  "non_loop": {
+                    "supported": 5,
+                    "contradicted": 123,
+                    "untestable": 87
+                  },
+                  "unknown": {
+                    "supported": 11,
+                    "contradicted": 75,
+                    "untestable": 214
+                  }
+                }
+              }
+            }
+          }
+        },
+        "selected": {
+          "family": "superpoint",
+          "keypoints": 1024,
+          "resize": null,
+          "full_depth": false,
+          "threshold": 0.3
+        },
+        "fixed_pairs_sha256": "3ec31808f210f2b5564b92e0c296e46cf3d06fe1be818c4cb9041d9ac1f2b93a",
+        "experiment_freeze_sha256": "46964d6dc399a51abeb5a42acf23e69d7a4f5669e332ececf6ce00b247bcff5b",
+        "selected_configuration_sha256": "f303e13e43f0c0bba20a5ee35d15c36aeec68d052bdb6067053e630b448b1851"
+      }
+    }
+  },
+  "ended_at_utc": "2026-10-10T17:08:29.038002+00:00",
+  "ended_at": "2026-10-10T20:08:29.038002+03:00"
+}
