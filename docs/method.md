@@ -7,48 +7,48 @@ the [notation reference](notation.md).
 
 ## 1. Causal candidate retrieval
 
-At query time $t_q$, eligible history is
+At query time $`t_q`$, eligible history is
 
-$$
+```math
 \mathcal H_q=\{h\in\text{past frames}:t_h\le t_q-\Delta\}.
-$$
+```
 
 The cutoff includes equality. Eligibility is applied before ranking, and the
 query is inserted only after its processing succeeds. For normalized global
 descriptors,
 
-$$
+```math
 d_q=\frac{g(I_q)}{\|g(I_q)\|_2},\qquad
 s(q,h)=d_q^\top d_h,\qquad
-\mathcal C_q=\operatorname{Top}_k\{(h,s(q,h)):h\in\mathcal H_q\}.
-$$
+\mathcal C_q=\mathrm{Top}_k\{(h,s(q,h)):h\in\mathcal H_q\}.
+```
 
 `Top` returns ordered historical identifiers, sorting scores descending and
-breaking ties by earlier timestamp. If fewer than $k$ frames are eligible, all
+breaking ties by earlier timestamp. If fewer than $`k`$ frames are eligible, all
 are returned. The current index uses exact cosine scores and full ordering;
 it is not approximate-nearest-neighbor search. Descriptor fingerprints reject
 incompatible model/preprocessing spaces.
 
-For $n$ eligible descriptors of dimension $d$, similarity computation costs
-$O(nd)$ and current full ordering costs $O(n\log n)$. Descriptor storage grows
+For $`n`$ eligible descriptors of dimension $`d`$, similarity computation costs
+$`O(nd)`$ and current full ordering costs $`O(n\log n)`$. Descriptor storage grows
 with history. The bounded local-feature cache does not bound total detector memory.
 
 ## 2. Local observations and assignments
 
 For sparse extraction,
 
-$$
+```math
 F_q=\{(u_i^q,d_i^q,\alpha_i^q)\}_{i=1}^{n_q},\qquad
 \mathcal M_{qh}=\{(i,j,c_{ij})\}.
-$$
+```
 
-$u_i^q$ is an original-camera pixel, $d_i^q$ a local descriptor, $\alpha_i^q$
-an extractor score, and $c_{ij}$ an adapter-defined matcher score. Each endpoint
+$`u_i^q`$ is an original-camera pixel, $`d_i^q`$ a local descriptor, $`\alpha_i^q`$
+an extractor score, and $`c_{ij}`$ an adapter-defined matcher score. Each endpoint
 appears at most once in sparse assignments. Extractor and matcher descriptor
 families must be compatible. The current baseline uses MegaLoc global retrieval
 and SuperPoint + LightGlue local matching; confidence 0.3 is the retained baseline.
 
-Image-pair matchers instead return $\{(u_i^q,v_i^h,c_i)\}$, whose points can depend
+Image-pair matchers instead return $`\{(u_i^q,v_i^h,c_i)\}`$, whose points can depend
 on both images. The EfficientLoFTR trial uses this distinct interface and is not
 promoted into the production detector registry. It cannot reuse sparse IDs by
 pretending pair-dependent points are cached SuperPoint observations.
@@ -62,18 +62,18 @@ offline reference verdicts do not filter runtime assignments.
 Reliable query stereo depth provides metric query-camera points. In undistorted
 pinhole notation,
 
-$$
+```math
 X_i^q=z_q(u_i^q)K_q^{-1}\tilde u_i^q.
-$$
+```
 
-The verifier estimates $\hat T_{hq}$ from query 3D points to historical 2D pixels.
+The verifier estimates $`\hat T_{hq}`$ from query 3D points to historical 2D pixels.
 Historical reprojection residuals are
 
-$$
+```math
 r_i(T)=\|\pi_h(TX_i^q)-v_i^h\|_2,
-$$
+```
 
-where $\pi_h$ is the calibrated projection including distortion. The
+where $`\pi_h`$ is the calibrated projection including distortion. The
 implementation uses seeded EPnP/RANSAC, LM refinement on selected inliers,
 recomputed residuals/inliers, and deterministic acceptance gates. These include
 usable-point count, inlier count/ratio, residual percentiles, cheirality, spatial
@@ -96,39 +96,39 @@ projection uses the actual supplied camera model.*
 Reference poses and depth enter only offline evaluation. For camera-to-world
 poses, the reference query-to-history transform is
 
-$$
+```math
 T_{hq}^{\star}=(T_{Wh}^{\star})^{-1}T_{Wq}^{\star}.
-$$
+```
 
 For judgeable endpoint depths,
 
-$$
+```math
 X_q=z_q^{\star}(u)K_q^{-1}\tilde u,\qquad
 X_h=z_h^{\star}(v)K_h^{-1}\tilde v.
-$$
+```
 
 The reference disagreement is assessed in metric space and in both projection
 directions:
 
-$$
+```math
 e_{XYZ}=\|T_{hq}^{\star}X_q-X_h\|_2,
-$$
+```
 
-$$
+```math
 e_{px}=\max\left(
 \|\pi_h(T_{hq}^{\star}X_q)-v\|_2,
 \|\pi_q((T_{hq}^{\star})^{-1}X_h)-u\|_2
 \right).
-$$
+```
 
 Here transform–point multiplication denotes rigid-transform action on the 3D
 point, equivalent to homogeneous multiplication. A match is supported when both
 endpoints are judgeable, projections are valid, and
 
-$$
+```math
 e_{XYZ}\le\max(\tau_{abs},\tau_{rel}\max(z_q,z_h)),\qquad
 e_{px}\le\tau_{px}.
-$$
+```
 
 Current feature gates use 0.05 m absolute tolerance, relative tolerance 0.005,
 and 3 pixels, as recorded by the relevant versioned configuration. Judgeable
@@ -142,10 +142,10 @@ Reference v1 uses a conservative depth neighborhood and the 0.25–50 m interval
 Depth-v2 samples known non-sky surfaces without that metric cutoff, using active
 bilinear inverse-depth interpolation:
 
-$$
+```math
 z(u)=\left(\sum_{r\in\mathcal N(u)}\frac{w_r(u)}{z_r}\right)^{-1},\qquad
 w_r\ge0,\quad\sum_r w_r=1.
-$$
+```
 
 Zero-weight neighbors do not invalidate a sample. Invalid depth, sky, unmapped
 semantics, outside-image coordinates, and mixed-depth footprints remain unknown.
@@ -163,20 +163,20 @@ locations. Directional visible overlap accounts for valid source depth,
 projection, occlusion/depth agreement, known non-overlap, and uncertain samples.
 For directional bounds, the symmetric bounds are
 
-$$
+```math
 o_L=\min(o_{q\to h,L},o_{h\to q,L}),\qquad
 o_U=\min(o_{q\to h,U},o_{h\to q,U}).
-$$
+```
 
-$$
+```math
 y_{qh}=\begin{cases}
 \text{loop} & o_L\ge\tau_o,\\
 \text{non-loop} & o_U<\tau_o,\\
 \text{unknown} & \text{otherwise}.
 \end{cases}
-$$
+```
 
-The pilot uses $\tau_o=0.20$. Incorrect individual assignments do not make an
+The pilot uses $`\tau_o=0.20`$. Incorrect individual assignments do not make an
 entire candidate pair false. Conversely, a positive image-pair overlap label
 does not certify its reported correspondences or estimated pose.
 
@@ -187,14 +187,14 @@ maximum temporal gap. A negative or unknown query does not bridge a confirmed
 run. Each event retains its positive historical matches per query. These runs are
 not necessarily independent physical revisits.
 
-With confirmed event set $\mathcal E_{conf}$,
+With confirmed event set $`\mathcal E_{conf}`$,
 
-$$
+```math
 H_{conf}@k=\frac{1}{|\mathcal E_{conf}|}
 \sum_{E\in\mathcal E_{conf}}\mathbf1[\exists(q,h)\in E:h\in\mathcal C_q].
-$$
+```
 
-$(q,h)\in E$ denotes an independently positive pair attached to the event.
+$`(q,h)\in E`$ denotes an independently positive pair attached to the event.
 When references are incomplete this is **confirmed-event hit coverage**, not
 overall recall. Report raw retrieval hits separately from events with at least
 20 independently supported matches, and separately from accepted constraints.
@@ -204,13 +204,13 @@ cannot conceal the loss of an existing useful event.
 
 ## 7. Unknown-aware metrics
 
-For supported $S$, contradicted $C$, unknown $U$, and $N=S+C+U$,
+For supported $`S`$, contradicted $`C`$, unknown $`U`$, and $`N=S+C+U`$,
 
-$$
-P_{judged}=\frac{S}{S+C},\qquad
+```math
+P_{\mathrm{judged}}=\frac{S}{S+C},\qquad
 \mathrm{Coverage}=\frac{S+C}{N},\qquad
-P_{all}\in\left[\frac{S}{N},\frac{S+U}{N}\right].
-$$
+P_{\mathrm{all}}\in\left[\frac{S}{N},\frac{S+U}{N}\right].
+```
 
 Bounds assign all unknown evidence to either extreme under the reference policy.
 They are not confidence intervals or calibrated physical-truth bounds. A zero
@@ -218,8 +218,8 @@ denominator gives an unavailable value, not zero performance. Pair precision use
 analogous positive/negative/unknown accounting; missing-input exclusions are
 reported separately. Zero-match candidate pairs remain in pair populations.
 
-For matching ablations, correct retention is $S_{new}/S_{base}$ and incorrect
-reduction is $1-C_{new}/C_{base}$. Report those with coverage and useful-event
+For matching ablations, correct retention is $`S_{new}/S_{base}`$ and incorrect
+reduction is $`1-C_{new}/C_{base}`$. Report those with coverage and useful-event
 identities. Each-method retrieval populations measure the combined system;
 identical-pair populations isolate matching settings more directly.
 
@@ -227,16 +227,16 @@ identical-pair populations isolate matching settings more directly.
 
 For transforms in the same direction and units,
 
-$$
+```math
 e_t=\|\hat t_{hq}-t_{hq}^{\star}\|_2,
-$$
+```
 
-$$
-e_R=\cos^{-1}\left(\operatorname{clip}\left(
-\frac{\operatorname{tr}((R_{hq}^{\star})^\top\hat R_{hq})-1}{2},-1,1\right)\right).
-$$
+```math
+e_R=\cos^{-1}\left(\mathrm{clip}\left(
+\frac{\mathrm{tr}((R_{hq}^{\star})^\top\hat R_{hq})-1}{2},-1,1\right)\right).
+```
 
-Convert $e_R$ from radians to degrees in reports. A pose within provisional
+Convert $`e_R`$ from radians to degrees in reports. A pose within provisional
 tolerances is a pose measurement, not proof of positive place overlap. A pose
 error does not automatically establish a false place detection. Jacobian
 conditioning is a numerical diagnostic, not calibrated covariance.

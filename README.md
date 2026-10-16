@@ -29,13 +29,13 @@ does not select them using operational acceptance or fitted pose.*
 
 ## Problem formulation
 
-Given chronological images $I_q$ with timestamps $t_q$, retrieve up to $k$
+Given chronological images $`I_q`$ with timestamps $`t_q`$, retrieve up to $`k`$
 historical candidates and their reported correspondences. To exclude immediate
 temporal neighbors, eligible history is
 
-$$
+```math
 \mathcal H_q=\{h\in\text{past frames}:t_h\le t_q-\Delta\}.
-$$
+```
 
 The detector queries before inserting the current frame. Candidate ranking,
 correspondence correctness, independently labeled image-pair overlap, confirmed
@@ -48,11 +48,11 @@ a geometrically accepted transform does not independently prove a correct loop.
 **Global retrieval.** Unit-normalized descriptors are compared by exact cosine
 similarity over eligible history:
 
-$$
+```math
 d_q=\frac{g(I_q)}{\|g(I_q)\|_2},\qquad
 s(q,h)=d_q^\top d_h,\qquad
-\mathcal C_q=\operatorname{Top}_k\{(h,s(q,h)):h\in\mathcal H_q\}.
-$$
+\mathcal C_q=\mathrm{Top}_k\{(h,s(q,h)):h\in\mathcal H_q\}.
+```
 
 Ties favor earlier timestamps. Representation fingerprints prevent mixing
 descriptor spaces. Historical descriptor storage grows with trajectory length;
@@ -66,20 +66,20 @@ Scores are not calibrated probabilities of loop correctness.
 
 **Optional operational verification.** Reliable query stereo depth supplies metric
 3D observations. Seeded EPnP/RANSAC, LM refinement, and count/residual/geometry
-gates estimate $\hat T_{hq}$, mapping query-camera points into the historical
+gates estimate $`\hat T_{hq}`$, mapping query-camera points into the historical
 camera. Runtime verification receives no reference pose, loop label, or offline
 feature verdict. It distinguishes accepted, rejected, and insufficient evidence.
 
 **Independent assessment.** Reference depth and poses assess every saved reported
 assignment using metric disagreement and symmetric reprojection. Independent
-surface-overlap bounds label candidate pairs. Supported $S$, contradicted $C$,
-and unknown $U$ assignments are reported together:
+surface-overlap bounds label candidate pairs. Supported $`S`$, contradicted $`C`$,
+and unknown $`U`$ assignments are reported together:
 
-$$
-P_{judged}=\frac{S}{S+C},\qquad
+```math
+P_{\mathrm{judged}}=\frac{S}{S+C},\qquad
 \mathrm{Coverage}=\frac{S+C}{S+C+U},\qquad
-P_{all}\in\left[\frac{S}{S+C+U},\frac{S+U}{S+C+U}\right].
-$$
+P_{\mathrm{all}}\in\left[\frac{S}{S+C+U},\frac{S+U}{S+C+U}\right].
+```
 
 These bounds describe correctness under the reference policy, not confidence
 intervals or calibrated physical truth. Unknown reference coverage withholds

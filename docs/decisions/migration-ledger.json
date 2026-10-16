@@ -1378,7 +1378,7 @@
       "old": "evaluation/src/tasks/optimization/heldout.py",
       "new": "src/loop_eval/tasks/optimization/heldout.py",
       "original_sha256": "133f64cc1ee1154c304155d596c2158869c5f9cd4845e0e75f792c74051b0c1f",
-      "migrated_sha256": "2c3508acc6e535e1ee319db27799b060338f27bebdcd251f82b1b9403b02c35a"
+      "migrated_sha256": "edaf1bdc5908a3042ebb2d0543559965239b99c78284c21d231be6af21fce0b9"
     },
     {
       "old": "evaluation/src/tasks/optimization/install_data.py",
@@ -1408,7 +1408,7 @@
       "old": "evaluation/src/tasks/optimization/training.py",
       "new": "src/loop_eval/tasks/optimization/training.py",
       "original_sha256": "9a694288b98c80961e5bd267de869676e549c12e675f2d4af646de5ccde6a43c",
-      "migrated_sha256": "3bb46210cfbd8243957f8a7959a736124cded77860c24740fefb1a7ca76efc83"
+      "migrated_sha256": "b526caffb184ba2726b920adac3d3678c7084f686f25a0929052b83d209f939d"
     },
     {
       "old": "evaluation/src/tasks/optimization/verify_runtime.py",

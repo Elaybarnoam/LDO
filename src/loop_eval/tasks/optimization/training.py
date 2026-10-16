@@ -305,9 +305,7 @@ def main():
     contexts = {k: v for k, v in contexts.items() if k in VALIDATE}
     first = json.loads((OUT / "step1.json").read_text())
     threshold = first["threshold"]
-    policy = CandidateConfidencePolicy.from_file(
-        ROOT / "configs/models/candidate-confidence.json"
-    )
+    policy = CandidateConfidencePolicy.from_file(ROOT / "configs/models/candidate-confidence.json")
     base = measure(pairs, contexts, threshold, policy)
     checkpoints, losses, gradient_norms = [], [], []
     generator = np.random.default_rng(0)

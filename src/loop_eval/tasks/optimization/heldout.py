@@ -55,9 +55,7 @@ def main():
     step1 = json.loads((OUT / "step1.json").read_text())
     step2 = json.loads((OUT / "step2.json").read_text())
     step3 = json.loads((OUT / "step3.json").read_text())
-    policy = CandidateConfidencePolicy.from_file(
-        ROOT / "configs/models/candidate-confidence.json"
-    )
+    policy = CandidateConfidencePolicy.from_file(ROOT / "configs/models/candidate-confidence.json")
     selected = step3["selected"]
     frozen = {
         "steps": [step1, step2, step3],

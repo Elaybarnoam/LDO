@@ -389,24 +389,24 @@ These definitions are a writing specification grounded in the current implementa
 
 | Symbol | Meaning | Convention |
 | --- | --- | --- |
-| $I_q, I_h$ | Query and historical camera images | Original sensor pixel coordinates |
-| $t_q, t_h$ | Frame timestamps | Integer nanoseconds in contracts; seconds only after explicit conversion |
-| $\Delta$ | Temporal exclusion duration | Same unit as timestamps in a given equation |
-| $K$ | Camera intrinsic matrix | Pixels; use $k$ for the retrieval budget to avoid ambiguity |
-| $T_{AB}$ | Transform taking coordinates from frame B to frame A | $X_A=R_{AB}X_B+t_{AB}$; homogeneous form where needed |
-| $T_{Wq},T_{Wh}$ | Reference camera-to-world poses | Offline evidence only |
-| $z_q(u)$ | Axial camera depth at pixel $u$ | Metres; not Euclidean range along the ray |
-| $g(I)$ | Global visual descriptor | Unit-normalized, fingerprinted representation |
-| $\mathcal C_q$ | Retrieved historical candidates | Ranked subset of causally eligible history |
-| $\mathcal M_{qh}$ | Reported temporal correspondences | Sparse IDs or pair-dependent pixels, explicitly distinguished |
-| $y_{qh}$ | Independent pair label | loop / non-loop / unknown |
-| $a_{qh}$ | Operational verification result | accepted / rejected / insufficient evidence |
+| $`I_q, I_h`$ | Query and historical camera images | Original sensor pixel coordinates |
+| $`t_q, t_h`$ | Frame timestamps | Integer nanoseconds in contracts; seconds only after explicit conversion |
+| $`\Delta`$ | Temporal exclusion duration | Same unit as timestamps in a given equation |
+| $`K`$ | Camera intrinsic matrix | Pixels; use $`k`$ for the retrieval budget to avoid ambiguity |
+| $`T_{AB}`$ | Transform taking coordinates from frame B to frame A | $`X_A=R_{AB}X_B+t_{AB}`$; homogeneous form where needed |
+| $`T_{Wq},T_{Wh}`$ | Reference camera-to-world poses | Offline evidence only |
+| $`z_q(u)`$ | Axial camera depth at pixel $`u`$ | Metres; not Euclidean range along the ray |
+| $`g(I)`$ | Global visual descriptor | Unit-normalized, fingerprinted representation |
+| $`\mathcal C_q`$ | Retrieved historical candidates | Ranked subset of causally eligible history |
+| $`\mathcal M_{qh}`$ | Reported temporal correspondences | Sparse IDs or pair-dependent pixels, explicitly distinguished |
+| $`y_{qh}`$ | Independent pair label | loop / non-loop / unknown |
+| $`a_{qh}`$ | Operational verification result | accepted / rejected / insufficient evidence |
 
 For each query, eligible history is
 
-$$
+```math
 \mathcal H_q=\{h\in\text{past frames}:\ t_h\le t_q-\Delta\}.
-$$
+```
 
 The inequality includes equality, matching `bisect_right` in the current index. Frame identifiers and timestamps are different quantities; only timestamps participate in the temporal comparison.
 
@@ -414,26 +414,26 @@ The implemented task is to produce ranked candidates and their correspondences f
 
 ### 5.2 Global retrieval
 
-$$
+```math
 d_q=\frac{g(I_q)}{\|g(I_q)\|_2},\qquad
 s(q,h)=d_q^\top d_h,\qquad
-\mathcal C_q=\operatorname{Top}_{k}\{(h,s(q,h)):h\in\mathcal H_q\}.
-$$
+\mathcal C_q=\mathrm{Top}_{k}\{(h,s(q,h)):h\in\mathcal H_q\}.
+```
 
-Use $k$ in prose and code for the candidate budget. Here $\operatorname{Top}_k$ returns the ordered candidate identifiers, with earlier-timestamp tie breaking and all eligible frames returned when fewer than $k$ exist. Query before inserting $q$. Document zero/nonfinite descriptor rejection and representation fingerprints. Current exact retrieval computes similarities over eligible history and orders them; do not describe it as an approximate-nearest-neighbor index.
+Use $`k`$ in prose and code for the candidate budget. Here $`\mathrm{Top}_k`$ returns the ordered candidate identifiers, with earlier-timestamp tie breaking and all eligible frames returned when fewer than $`k`$ exist. Query before inserting $`q`$. Document zero/nonfinite descriptor rejection and representation fingerprints. Current exact retrieval computes similarities over eligible history and orders them; do not describe it as an approximate-nearest-neighbor index.
 
 **Implementation:** `ldo/retrieval/index.py`, `ldo/detector.py`, and encoder adapters.
 
 ### 5.3 Local features and assignments
 
-$$
+```math
 F_q=\{(u_i^q,d_i^q,\alpha_i^q)\}_{i=1}^{n_q},\qquad
 \mathcal M_{qh}=\{(i,j,c_{ij})\}.
-$$
+```
 
-Define original-pixel coordinates $u$, local descriptors $d$, extractor scores $\alpha$, and matcher scores $c$. The sparse contract requires one-to-one endpoint IDs. Explain compatible extractor/matcher families, score thresholds, exact comparison operators, feature budgets, and resize-to-original-coordinate mapping.
+Define original-pixel coordinates $`u`$, local descriptors $`d`$, extractor scores $`\alpha`$, and matcher scores $`c`$. The sparse contract requires one-to-one endpoint IDs. Explain compatible extractor/matcher families, score thresholds, exact comparison operators, feature budgets, and resize-to-original-coordinate mapping.
 
-For an image-pair matcher use $\{(u_i^q,v_i^h,c_i)\}$ instead; its observations can depend on both images and need not share stable cached feature IDs. Do not call matching scores posterior correctness probabilities without calibration evidence.
+For an image-pair matcher use $`\{(u_i^q,v_i^h,c_i)\}`$ instead; its observations can depend on both images and need not share stable cached feature IDs. Do not call matching scores posterior correctness probabilities without calibration evidence.
 
 **Implementation:** `ldo/contracts.py`, `ldo/matching/`, and the configuration factories.
 
@@ -441,20 +441,20 @@ For an image-pair matcher use $\{(u_i^q,v_i^h,c_i)\}$ instead; its observations 
 
 Backproject reliable query stereo observations and estimate a transform into the historical camera:
 
-$$
+```math
 X_i^q=z_q(u_i^q)K_q^{-1}\tilde u_i^q,\qquad
 \hat T_{hq}: X_q\mapsto X_h.
-$$
+```
 
-This pinhole backprojection formula assumes undistorted coordinates. The final method must describe the actual raw-camera calibration/distortion treatment; do not apply $K^{-1}$ directly to distorted pixels and call it exact geometry.
+This pinhole backprojection formula assumes undistorted coordinates. The final method must describe the actual raw-camera calibration/distortion treatment; do not apply $`K^{-1}`$ directly to distorted pixels and call it exact geometry.
 
 Explain the PnP task through historical reprojection residuals:
 
-$$
+```math
 r_i(T)=\left\|\pi_h(TX_i^q)-v_i^h\right\|_2,
-$$
+```
 
-where $\pi_h$ includes the historical camera's projection/distortion model. The implementation uses seeded EPnP/RANSAC, LM refinement, recomputed residuals/inliers, and deterministic count, ratio, residual, cheirality, geometry, and conditioning gates. Explain those gates with their configuration keys and units.
+where $`\pi_h`$ includes the historical camera's projection/distortion model. The implementation uses seeded EPnP/RANSAC, LM refinement, recomputed residuals/inliers, and deterministic count, ratio, residual, cheirality, geometry, and conditioning gates. Explain those gates with their configuration keys and units.
 
 Distinguish absent/unreliable depth, failed estimation, degenerate geometry, and rejection by policy. Runtime inputs contain no reference pose, overlap label, or offline feature verdict. Accepted output is a geometric constraint proposal, not an independently confirmed loop.
 
@@ -464,40 +464,40 @@ Distinguish absent/unreliable depth, failed estimation, degenerate geometry, and
 
 For the reference pinhole camera, obtain a reference relative transform and endpoint positions:
 
-$$
+```math
 T_{hq}^{\star}=(T_{Wh}^{\star})^{-1}T_{Wq}^{\star},\qquad
 X_q=z_q^{\star}(u)K_q^{-1}\tilde u,\qquad
 X_h=z_h^{\star}(v)K_h^{-1}\tilde v.
-$$
+```
 
 Define metric disagreement and symmetric reprojection disagreement:
 
-$$
+```math
 e_{XYZ}=\|T_{hq}^{\star}X_q-X_h\|_2,
-$$
+```
 
-$$
+```math
 e_{px}=\max\left(
 \|\pi_h(T_{hq}^{\star}X_q)-v\|_2,
 \|\pi_q((T_{hq}^{\star})^{-1}X_h)-u\|_2
 \right).
-$$
+```
 
 Transforms on 3D points use the rigid-transform action, or homogeneous coordinates explicitly. A correspondence is supported only when both endpoint samples are judgeable, projections are valid, and both configured gates pass:
 
-$$
+```math
 e_{XYZ}\le\max(\tau_{abs},\tau_{rel}\max(z_q,z_h)),\qquad
 e_{px}\le\tau_{px}.
-$$
+```
 
 Judgeable correspondences that fail the policy are contradicted. Unjudgeable ones remain unknown/untestable. Document how serialized `untestable` corresponds to the public term unknown.
 
 Explain reference-depth v1 versus v2 separately. V2 uses valid non-sky semantics and inverse-depth interpolation over active bilinear neighbors, with no interpolation across an invalid or discontinuous footprint:
 
-$$
+```math
 z(u)=\left(\sum_{r\in\mathcal N(u)}\frac{w_r(u)}{z_r}\right)^{-1},\qquad
 w_r\ge0,\quad\sum_r w_r=1.
-$$
+```
 
 Record the integer pixel-center convention, active-neighbor rule, sky/unmapped semantics, discontinuity policy, and assumptions. Do not suggest that v2 changed the independent pair/event policy when only feature correspondences were rescored.
 
@@ -507,55 +507,55 @@ Record the integer pixel-center convention, active-neighbor rule, sky/unmapped s
 
 For a fixed detector-independent sampling grid, define directional visible-overlap lower and upper bounds. Document sampling, validity, projection, occlusion/depth agreement, and uncertain samples. The current pair policy uses
 
-$$
+```math
 o_L=\min(o_{q\to h,L},o_{h\to q,L}),\qquad
 o_U=\min(o_{q\to h,U},o_{h\to q,U}).
-$$
+```
 
-$$
+```math
 y_{qh}=\begin{cases}
 \text{loop} & o_L\ge\tau_o,\\
 \text{non-loop} & o_U<\tau_o,\\
 \text{unknown} & \text{otherwise}.
 \end{cases}
-$$
+```
 
 Define events through the actual reference-positive query runs, temporal gap policy, and historical matches attached to each query. Unknown/negative queries do not bridge confirmed events in the current implementation. These event runs need not be independent physical revisits.
 
-For confirmed reference events $\mathcal E_{conf}$,
+For confirmed reference events $`\mathcal E_{conf}`$,
 
-$$
+```math
 H_{conf}@k=\frac{\sum_{E\in\mathcal E_{conf}}
 \mathbf1[\exists(q,h)\in E:\ h\in\mathcal C_q]}{|\mathcal E_{conf}|}.
-$$
+```
 
-Define $(q,h)\in E$ as one of that event's independently positive query/history pairs. Call this confirmed-event hit coverage when reference completeness is insufficient for overall recall. Report raw retrieval hits, hits with at least 20 independently supported matches, and hits reached by accepted verified constraints separately. The 20-match diagnostic is not a runtime truth filter or a SLAM acceptance criterion.
+Define $`(q,h)\in E`$ as one of that event's independently positive query/history pairs. Call this confirmed-event hit coverage when reference completeness is insufficient for overall recall. Report raw retrieval hits, hits with at least 20 independently supported matches, and hits reached by accepted verified constraints separately. The 20-match diagnostic is not a runtime truth filter or a SLAM acceptance criterion.
 
 **Implementation:** `reference_geometry/geometry.py`, `loop_closure/revisits/metrics.py`, and experiment-specific event reporting.
 
 ### 5.7 Unknown-aware correspondence and pair metrics
 
-With supported count $S$, contradicted count $C$, unknown count $U$, and $N=S+C+U$:
+With supported count $`S`$, contradicted count $`C`$, unknown count $`U`$, and $`N=S+C+U`$:
 
-$$
-P_{judged}=\frac{S}{S+C},\qquad
+```math
+P_{\mathrm{judged}}=\frac{S}{S+C},\qquad
 \mathrm{Coverage}=\frac{S+C}{N},\qquad
-P_{all}\in\left[\frac{S}{N},\frac{S+U}{N}\right].
-$$
+P_{\mathrm{all}}\in\left[\frac{S}{N},\frac{S+U}{N}\right].
+```
 
 State that these are bounds on correctness under the reference policy, not calibrated bounds on physical truth. They are not confidence intervals. Define zero-denominator values as unavailable, and include excluded/missing-input cases outside the evaluated population explicitly. Use analogous known/false/unknown accounting for pair precision.
 
-For ablations report correct retention $S_{new}/S_{base}$ and incorrect reduction $1-C_{new}/C_{base}$ together with coverage and event identities. Counts on different retrieved populations answer a system question; they do not isolate matcher quality.
+For ablations report correct retention $`S_{new}/S_{base}`$ and incorrect reduction $`1-C_{new}/C_{base}`$ together with coverage and event identities. Counts on different retrieved populations answer a system question; they do not isolate matcher quality.
 
 ### 5.8 Independent pose error
 
 For estimated and reference transforms in the same direction and units:
 
-$$
+```math
 e_t=\|\hat t_{hq}-t_{hq}^{\star}\|_2,\qquad
-e_R=\cos^{-1}\left(\operatorname{clip}
-\left(\frac{\operatorname{tr}((R_{hq}^{\star})^\top\hat R_{hq})-1}{2},-1,1\right)\right).
-$$
+e_R=\cos^{-1}\left(\mathrm{clip}
+\left(\frac{\mathrm{tr}((R_{hq}^{\star})^\top\hat R_{hq})-1}{2},-1,1\right)\right).
+```
 
 Report metres and degrees, with explicit radian-to-degree conversion. Publish tolerances as provisional experiment policy unless calibrated. Small pose error is a different measurement from positive place overlap; a pose error alone does not establish a false place match. Conditioning diagnostics are not calibrated pose covariance.
 
@@ -572,7 +572,7 @@ Aim for five or six purposeful public figures, with detailed supplementary figur
 | Figure | Question answered | Content/source | Placement and acceptance requirement |
 | --- | --- | --- | --- |
 | System overview | What enters the system and what does it produce? | Actual visual retrieval, matching, optional stereo/PnP verification, and separate reference evaluation | README near top; visible separation between runtime observations and offline reference evidence |
-| Geometry/convention diagram | Which way do transforms map and how are residuals measured? | Query/history/world frames, $T_{hq}$, rays, depths, endpoint projection | Short README method or method document; agree with tested conventions |
+| Geometry/convention diagram | Which way do transforms map and how are residuals measured? | Query/history/world frames, $`T_{hq}`$, rays, depths, endpoint projection | Short README method or method document; agree with tested conventions |
 | Representative match examples | What does supported/contradicted/unknown evidence look like? | Saved real image pairs and original feature verdicts, including a difficult/failed case | README plus supplement; captions include run/pair identity and evaluator version |
 | Matching trade-off | What is gained and what is lost by filtering? | Correct/incorrect counts or retention curves, coverage, and useful-event outcomes | README result section; fixed population and selection rules stated |
 | Retrieval/event evidence | Which confirmed opportunities were reached? | Per-sequence candidate metrics or event timeline with unknown intervals | Detailed results, optionally README; distinguish confirmed-event coverage from complete recall |
