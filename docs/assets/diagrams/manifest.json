@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "generator": "scripts/figures/render_diagrams.py",
+  "generator_sha256": "9fd1ece208bc31b2106269aa31ed7db2da725ee6f345fa7da80a5a9290baafdd",
+  "figures": [
+    {
+      "file": "system-overview.svg",
+      "sha256": "ee9dbeb5664a386036085538d94906f2c2e56c288b529c29e7f00cfee5b04a12",
+      "kind": "implementation_schematic",
+      "research_measurement": false
+    },
+    {
+      "file": "system-overview.png",
+      "sha256": "ef4df474b65ffa1e96ac43adf7e7ef98f97941efcff3d63461d533a87eaf3feb",
+      "kind": "implementation_schematic",
+      "research_measurement": false
+    },
+    {
+      "file": "coordinate-conventions.svg",
+      "sha256": "52165387ed8d17b44324c751e53a6d1aae4fe8f660fc1d783c14f8bb43a6eab8",
+      "kind": "implementation_schematic",
+      "research_measurement": false
+    },
+    {
+      "file": "coordinate-conventions.png",
+      "sha256": "60c623b1f38671d9309f6ecf37470f3cc20857e5f11c4a8484869d1949917d26",
+      "kind": "implementation_schematic",
+      "research_measurement": false
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "dataset_role": "test at execution; later matching development",
+  "derived": {
+    "metrics.json": "f4db93ee3d9f8d79401702702f1d9f65a6750892836dfd88c7a4ad41bddf9bd3",
+    "table.csv": "8c4207762e1b5b904bd359f2c8c15f553ff8455f9423f01f2cde768b4dd21dfc"
+  },
+  "evaluator": "reference-v1",
+  "experiment_id": "factory-desert-frozen",
+  "generator": {
+    "path": "scripts/reproduce/publish.py",
+    "sha256": "a6fbcb25af1e0ac4d98dd1a50c0e07cd3ee3928c1e78c8b37d65c67362893484"
+  },
+  "kind": "historical_evidence_index",
+  "raw_evidence_in_repository": false,
+  "schema_version": 1,
+  "scope": "Index and derived presentation; not a new inference run or numerical rescore",
+  "sources": {
+    "docs/archive/ldo-unseen-tartanair-plan.md": "da9a333b7fbeedfa805ad12ab3cdc98445bf4e4db499ee87a4b47322edff01ff",
+    "docs/archive/ldo-unseen-tartanair-results.json": "f4042982a4bf147ffb2c0fa41653186b770ab6a2538b4dc30f6df887c8785841",
+    "docs/archive/ldo-unseen-tartanair-results.md": "c0a443a0eac21ef3019246831208f24e7d28018be79d817c554c531184ad73d2"
+  },
+  "status": "completed_historical",
+  "title": "Frozen Factory/Desert comparison"
+}

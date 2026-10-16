@@ -1,0 +1,61 @@
+{
+  "experiments": [
+    {
+      "dataset_role": "pilot",
+      "evaluator": "reference-v1",
+      "id": "tartanair-pilot-v1",
+      "manifest": "tartanair-pilot-v1/manifest.json",
+      "title": "TartanAir pilot"
+    },
+    {
+      "dataset_role": "held-out at execution; now inspected",
+      "evaluator": "reference-v1",
+      "id": "sequential-optimization",
+      "manifest": "sequential-optimization/manifest.json",
+      "title": "Sequential optimization"
+    },
+    {
+      "dataset_role": "test at execution; later matching development",
+      "evaluator": "reference-v1",
+      "id": "factory-desert-frozen",
+      "manifest": "factory-desert-frozen/manifest.json",
+      "title": "Frozen Factory/Desert comparison"
+    },
+    {
+      "dataset_role": "rescore of inspected evidence",
+      "evaluator": "feature-depth-v2; original pair policy",
+      "id": "reference-depth-v2",
+      "manifest": "reference-depth-v2/manifest.json",
+      "title": "Reference depth v2 rescore"
+    },
+    {
+      "dataset_role": "Factory/Desert development; OldTownFall test at execution, now inspected",
+      "evaluator": "feature-depth-v2; original pair policy",
+      "id": "matching-oldtown",
+      "manifest": "matching-oldtown/manifest.json",
+      "title": "Matching selection and OldTownFall test"
+    },
+    {
+      "dataset_role": "reference-assisted analysis of inspected evidence",
+      "evaluator": "feature-depth-v2",
+      "id": "matching-diagnostics",
+      "manifest": "matching-diagnostics/manifest.json",
+      "title": "Matching failure diagnosis"
+    },
+    {
+      "dataset_role": "positive development pairs; reference-assisted diagnosis",
+      "evaluator": "feature-depth-v2",
+      "id": "descriptor-analysis",
+      "manifest": "descriptor-analysis/manifest.json",
+      "title": "Descriptor and assignment audit"
+    },
+    {
+      "dataset_role": "Factory/Desert fit and validation; failed promotion, no fresh test",
+      "evaluator": "feature-depth-v2",
+      "id": "efficientloftr-trial",
+      "manifest": "efficientloftr-trial/manifest.json",
+      "title": "Joint image-pair matcher trial"
+    }
+  ],
+  "schema_version": 1
+}

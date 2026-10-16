@@ -1,0 +1,20 @@
+{
+  "dataset_role": "rescore of inspected evidence",
+  "evaluator": "feature-depth-v2; original pair policy",
+  "experiment_id": "reference-depth-v2",
+  "generator": {
+    "path": "scripts/reproduce/publish.py",
+    "sha256": "a6fbcb25af1e0ac4d98dd1a50c0e07cd3ee3928c1e78c8b37d65c67362893484"
+  },
+  "kind": "historical_evidence_index",
+  "raw_evidence_in_repository": false,
+  "schema_version": 1,
+  "scope": "Index and derived presentation; not a new inference run or numerical rescore",
+  "sources": {
+    "docs/archive/reference-depth-v2-plan.md": "90dca1ea9a05224e8d1ba1eb02f9726fec2ff8b0ef9f5ba890fa6614f0ce96fa",
+    "docs/archive/reference-depth-v2-report.json": "a9bde11c809feb652a323785bb5cc8398df84f6bb9f4b26ca437696f8faf5d2a",
+    "docs/archive/reference-depth-v2-results.md": "c32857b1391c9d8bdd2a9363a14ed973aff58546961e125034c49ce9e5913dd1"
+  },
+  "status": "completed_historical",
+  "title": "Reference depth v2 rescore"
+}

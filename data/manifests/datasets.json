@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "datasets": [
+    {
+      "name": "TartanAir v2",
+      "repository": "theairlabcmu/tartanair2",
+      "revision": "0d2d145e973832742a2aaa04b7d2ebffc8d82817",
+      "installer": "src/loop_eval/tasks/reference_geometry/install.py",
+      "archive_checksums": "Recorded and verified by the installer in the generated installation manifest",
+      "bulk_assets_in_git": false,
+      "roles": "See docs/protocols/README.md; role changes with selection history"
+    },
+    {
+      "name": "EuRoC MAV",
+      "installer": "src/loop_eval/benchmarks/orb_slam3/setup/stage_euroc.py",
+      "bulk_assets_in_git": false,
+      "roles": "Existing calibration, correspondence, and native instrumentation experiments"
+    }
+  ]
+}

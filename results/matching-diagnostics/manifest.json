@@ -1,0 +1,20 @@
+{
+  "dataset_role": "reference-assisted analysis of inspected evidence",
+  "evaluator": "feature-depth-v2",
+  "experiment_id": "matching-diagnostics",
+  "generator": {
+    "path": "scripts/reproduce/publish.py",
+    "sha256": "a6fbcb25af1e0ac4d98dd1a50c0e07cd3ee3928c1e78c8b37d65c67362893484"
+  },
+  "kind": "historical_evidence_index",
+  "raw_evidence_in_repository": false,
+  "schema_version": 1,
+  "scope": "Index and derived presentation; not a new inference run or numerical rescore",
+  "sources": {
+    "docs/archive/ldo-matching-diagnostics-plan.md": "9ea9d8cee222289b60becb1de453123c7c26f6461d33eab6269d40c39bd1d585",
+    "docs/archive/ldo-matching-diagnostics-results.json": "c1e50d8b313b329a9011ba9dc1329e97dabb83ad15f2d100a8c4a4ef6cfa620c",
+    "docs/archive/ldo-matching-diagnostics-results.md": "8001353ede6e06e343928b08896ae703a686445324651a8029108f86ee65c202"
+  },
+  "status": "completed_historical",
+  "title": "Matching failure diagnosis"
+}

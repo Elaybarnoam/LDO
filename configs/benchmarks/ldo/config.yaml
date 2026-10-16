@@ -1,0 +1,9 @@
+version: 1
+sequence: MH_01_easy
+dataset_root: evaluation/datasets/euroc
+native_dataset_root: /opt/loop-detector/datasets/euroc
+sample_hz: 2
+detector_config: configs/models/megaloc_lightglue.yaml
+candidate_evaluation:
+  enabled: true
+  config: configs/evaluation/feature_matching/xyz/config.yaml

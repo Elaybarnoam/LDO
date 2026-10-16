@@ -1,6 +1,0 @@
-version: 1
-source_root: /opt/loop-detector/experiments/matching_optimization
-artifact_root: /opt/loop-detector/experiments/matching_diagnostics/v1
-evaluator: evaluation/src/tasks/reference_depth_v2/config.yaml
-minimum_correct_matches_per_pair: 20
-development_roles: [fit, validate]

@@ -1,0 +1,25 @@
+{
+  "dataset_role": "Factory/Desert development; OldTownFall test at execution, now inspected",
+  "derived": {
+    "metrics.json": "9e3127b0617c3a928934702e28f0d3fd7667f8f4067c2ed3cc20d3a089a133ce",
+    "table.csv": "050dd3c0c2fba8153b2bf0cb701e32942e43d78a1629a84819c8ec85f5215f51",
+    "table.md": "ef4ecbb1dbc9c463f21709c00bbe897b5ee435ccb6b0c994253892c79664a498"
+  },
+  "evaluator": "feature-depth-v2; original pair policy",
+  "experiment_id": "matching-oldtown",
+  "generator": {
+    "path": "scripts/reproduce/publish.py",
+    "sha256": "a6fbcb25af1e0ac4d98dd1a50c0e07cd3ee3928c1e78c8b37d65c67362893484"
+  },
+  "kind": "historical_evidence_index",
+  "raw_evidence_in_repository": false,
+  "schema_version": 1,
+  "scope": "Index and derived presentation; not a new inference run or numerical rescore",
+  "sources": {
+    "docs/archive/ldo-matching-optimization-plan.md": "e2318a35ccdf492297d6c1e5efc179cdebd3eb094ebe0a75f4dbf2f3b02a4194",
+    "docs/archive/ldo-matching-optimization-results.json": "d272f3b9e39784c48e8838fc63d88d4eab9583af532a089acfa6794908ff83f2",
+    "docs/archive/ldo-matching-optimization-results.md": "a6701911c79c6fbcfb27c6119a7022908b4a131f0d7490baf3f81abe196deb46"
+  },
+  "status": "completed_historical",
+  "title": "Matching selection and OldTownFall test"
+}

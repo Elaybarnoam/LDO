@@ -6,3 +6,19 @@
 *.md text eol=lf
 *.toml text eol=lf
 *.lock text eol=lf
+*.json text eol=lf
+*.csv text eol=lf
+*.svg text eol=lf
+*.cff text eol=lf
+*.bib text eol=lf
+*.cc text eol=lf
+*.h text eol=lf
+CMakeLists.txt text eol=lf
+
+# Historical evidence and fingerprint-sensitive numerical files are byte artifacts.
+docs/archive/** -text -whitespace
+docs/assets/** -text -whitespace
+src/loop_eval/tasks/feature_matching/xyz/xyz.py -text whitespace=cr-at-eol
+src/loop_eval/tasks/feature_matching/xyz/stereo_worker.py -text whitespace=cr-at-eol
+src/stereo_observations/stereo_worker.py -text whitespace=cr-at-eol
+configs/evaluation/feature_matching/xyz/config.yaml -text whitespace=cr-at-eol

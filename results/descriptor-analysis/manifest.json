@@ -1,0 +1,20 @@
+{
+  "dataset_role": "positive development pairs; reference-assisted diagnosis",
+  "evaluator": "feature-depth-v2",
+  "experiment_id": "descriptor-analysis",
+  "generator": {
+    "path": "scripts/reproduce/publish.py",
+    "sha256": "a6fbcb25af1e0ac4d98dd1a50c0e07cd3ee3928c1e78c8b37d65c67362893484"
+  },
+  "kind": "historical_evidence_index",
+  "raw_evidence_in_repository": false,
+  "schema_version": 1,
+  "scope": "Index and derived presentation; not a new inference run or numerical rescore",
+  "sources": {
+    "docs/archive/ldo-descriptor-analysis-plan.md": "25abedf35c83aff4824ec122ef954e35477ffaf9df92e32fceabf444454c08ac",
+    "docs/archive/ldo-descriptor-analysis-results.json": "9330b8b063eabb03c64d6b7b3293766a992b7df94fbcf836ede82304b203f809",
+    "docs/archive/ldo-descriptor-analysis-results.md": "3c8936ea95b5275e7ea5787214ce85bc29235abc3371f490689ff38f8682727f"
+  },
+  "status": "completed_historical",
+  "title": "Descriptor and assignment audit"
+}

@@ -42,7 +42,9 @@ def main() -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
     original_directory = Path.cwd()
     os.chdir(output.parent)
-    writer = cv2.VideoWriter(output.name, cv2.VideoWriter_fourcc(*"mp4v"), 20.0, (width * 2, height + 36))
+    writer = cv2.VideoWriter(
+        output.name, cv2.VideoWriter_fourcc(*"mp4v"), 20.0, (width * 2, height + 36)
+    )
     if not writer.isOpened():
         raise RuntimeError(f"Cannot open video writer for {output}")
 
@@ -56,9 +58,36 @@ def main() -> None:
             frame[36:, width:] = cv2.cvtColor(images[1], cv2.COLOR_GRAY2BGR)
             elapsed = (timestamp - timestamps[0]) / 1e9
             label = f"{args.sequence}  |  {elapsed:06.2f} s  |  frame {index + 1}/{len(timestamps)}"
-            cv2.putText(frame, label, (12, 25), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (255, 255, 255), 1, cv2.LINE_AA)
-            cv2.putText(frame, "cam0", (12, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (255, 255, 255), 2, cv2.LINE_AA)
-            cv2.putText(frame, "cam1", (width + 12, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (255, 255, 255), 2, cv2.LINE_AA)
+            cv2.putText(
+                frame,
+                label,
+                (12, 25),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.65,
+                (255, 255, 255),
+                1,
+                cv2.LINE_AA,
+            )
+            cv2.putText(
+                frame,
+                "cam0",
+                (12, 60),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.65,
+                (255, 255, 255),
+                2,
+                cv2.LINE_AA,
+            )
+            cv2.putText(
+                frame,
+                "cam1",
+                (width + 12, 60),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.65,
+                (255, 255, 255),
+                2,
+                cv2.LINE_AA,
+            )
             writer.write(frame)
     finally:
         writer.release()

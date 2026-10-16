@@ -1,7 +1,6 @@
-"""Entry point for evaluation."""
+"""Compatibility launcher; install the project with uv sync first."""
 
-from modules.orchestrator.orchestrator import Orchestrator
-
+from loop_eval.infrastructure.orchestrator.orchestrator import Orchestrator
 
 if __name__ == "__main__":
     Orchestrator().run()

@@ -1,0 +1,13 @@
+version: 1
+variant: LDO-MegaLoc-EfficientLoFTR-Trial
+source_root: /opt/loop-detector/experiments/matching_optimization
+model_root: /opt/loop-detector/efficientloftr-model
+artifact_root: /opt/loop-detector/experiments/image_pair_matching/v1
+evaluator: configs/evaluation/reference_depth_v2/config.yaml
+device: cuda
+threshold: 0.2
+maximum_matches: 1024
+seed: 0
+minimum_correct_matches_per_pair: 20
+minimum_correct_match_retention: 0.90
+minimum_usable_pair_retention: 0.95

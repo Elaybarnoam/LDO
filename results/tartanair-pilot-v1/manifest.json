@@ -1,0 +1,20 @@
+{
+  "dataset_role": "pilot",
+  "evaluator": "reference-v1",
+  "experiment_id": "tartanair-pilot-v1",
+  "generator": {
+    "path": "scripts/reproduce/publish.py",
+    "sha256": "a6fbcb25af1e0ac4d98dd1a50c0e07cd3ee3928c1e78c8b37d65c67362893484"
+  },
+  "kind": "historical_evidence_index",
+  "raw_evidence_in_repository": false,
+  "schema_version": 1,
+  "scope": "Index and derived presentation; not a new inference run or numerical rescore",
+  "sources": {
+    "docs/archive/tartanair-direct-report.md": "2823a86f0c143750ba6e43f3aa5582005022b49fd5dc18645bee744a3f588718",
+    "docs/archive/tartanair-reference-geometry-plan.md": "b06353fbbf2e36081247f683cfd192e51b4618123f20d4719e56664200349290",
+    "docs/archive/tartanair-reference-geometry-results.md": "0e5b05dbd82b2c52e02051f5250c333c33cb55b2c7b4322bb23027ff69c39d26"
+  },
+  "status": "completed_historical",
+  "title": "TartanAir pilot"
+}

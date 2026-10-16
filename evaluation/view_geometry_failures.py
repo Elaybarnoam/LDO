@@ -12,7 +12,7 @@ import cv2
 import numpy as np
 
 PROJECT = Path(__file__).resolve().parents[1]
-TEMPLATE = PROJECT / "evaluation/src/tasks/feature_matching/viewer/geometry_failures.html"
+TEMPLATE = PROJECT / "src/loop_eval/tasks/feature_matching/viewer/geometry_failures.html"
 
 
 def local_path(value: str, distro: str) -> Path:
@@ -139,7 +139,9 @@ def build(results_path: Path, output: Path, distro: str) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--results", type=Path, default=PROJECT / ".docs/ldo-matching-diagnostics-results.json"
+        "--results",
+        type=Path,
+        default=PROJECT / "docs/archive/ldo-matching-diagnostics-results.json",
     )
     parser.add_argument(
         "--output", type=Path, default=PROJECT / "evaluation/output/geometry-failures/index.html"

@@ -1,0 +1,70 @@
+{
+  "figures": [
+    {
+      "experiment_id": "matching-oldtown",
+      "file": "matching-tradeoff.svg",
+      "selection_rule": "All three OldTownFall trajectories; both frozen LDO variants",
+      "sha256": "864bfd5356866750cb75fd6839dff1dcd481dfdaa5c47e9c085b950761cbf50c",
+      "source_metrics_sha256": "9e3127b0617c3a928934702e28f0d3fd7667f8f4067c2ed3cc20d3a089a133ce"
+    },
+    {
+      "experiment_id": "matching-oldtown",
+      "file": "matching-tradeoff.png",
+      "selection_rule": "All three OldTownFall trajectories; both frozen LDO variants",
+      "sha256": "5e38da7c13520f3103f4b814577f07f8d0f71a5c3573819e70cfcff6d2e32e68",
+      "source_metrics_sha256": "9e3127b0617c3a928934702e28f0d3fd7667f8f4067c2ed3cc20d3a089a133ce"
+    },
+    {
+      "experiment_id": "matching-oldtown",
+      "file": "matching-tradeoff.pdf",
+      "selection_rule": "All three OldTownFall trajectories; both frozen LDO variants",
+      "sha256": "7cbfce73774cfea933b6b325245a6ec483e1be26c4626c5c2dd14cc4853356bd",
+      "source_metrics_sha256": "9e3127b0617c3a928934702e28f0d3fd7667f8f4067c2ed3cc20d3a089a133ce"
+    },
+    {
+      "experiment_id": "efficientloftr-trial",
+      "file": "joint-matcher-trial.svg",
+      "selection_rule": "All 320 fixed validation pairs; no promotion or fresh-test replay",
+      "sha256": "52df6aa5e84b9ed3c033cccd5c9faff91378b60e73dcc40ffcead28084a94605",
+      "source_metrics_sha256": "d1db1036a8d9bfbbe2567e752665e9cbd0b23855f6eb8ceec45bd9fb9e6f6290"
+    },
+    {
+      "experiment_id": "efficientloftr-trial",
+      "file": "joint-matcher-trial.png",
+      "selection_rule": "All 320 fixed validation pairs; no promotion or fresh-test replay",
+      "sha256": "696f54cfc18f65bde799829618fc9a5641592ee095ffd612411d980902215906",
+      "source_metrics_sha256": "d1db1036a8d9bfbbe2567e752665e9cbd0b23855f6eb8ceec45bd9fb9e6f6290"
+    },
+    {
+      "experiment_id": "efficientloftr-trial",
+      "file": "joint-matcher-trial.pdf",
+      "selection_rule": "All 320 fixed validation pairs; no promotion or fresh-test replay",
+      "sha256": "aa4c8890820674d76ac621a2b487b27fe4a9a0bc12999157cc4e26322ad34894",
+      "source_metrics_sha256": "d1db1036a8d9bfbbe2567e752665e9cbd0b23855f6eb8ceec45bd9fb9e6f6290"
+    },
+    {
+      "experiment_id": "factory-desert-frozen",
+      "file": "retrieval-evidence.svg",
+      "selection_rule": "All 11 Factory/Desert trajectories; original pair policy",
+      "sha256": "756af8272a7247898800e524695d8864a25a84640a8c96534540d465330d2b18",
+      "source_metrics_sha256": "f4db93ee3d9f8d79401702702f1d9f65a6750892836dfd88c7a4ad41bddf9bd3"
+    },
+    {
+      "experiment_id": "factory-desert-frozen",
+      "file": "retrieval-evidence.png",
+      "selection_rule": "All 11 Factory/Desert trajectories; original pair policy",
+      "sha256": "0fdce74c04004677643e61b592e1394be298e128d871571e8a8fedb80d179808",
+      "source_metrics_sha256": "f4db93ee3d9f8d79401702702f1d9f65a6750892836dfd88c7a4ad41bddf9bd3"
+    },
+    {
+      "experiment_id": "factory-desert-frozen",
+      "file": "retrieval-evidence.pdf",
+      "selection_rule": "All 11 Factory/Desert trajectories; original pair policy",
+      "sha256": "2d21da4f56bd96272b00622bb9a196f32f891986bd361a02e601af3789e5d794",
+      "source_metrics_sha256": "f4db93ee3d9f8d79401702702f1d9f65a6750892836dfd88c7a4ad41bddf9bd3"
+    }
+  ],
+  "generator_sha256": "a6fbcb25af1e0ac4d98dd1a50c0e07cd3ee3928c1e78c8b37d65c67362893484",
+  "matplotlib": "3.11.2",
+  "schema_version": 1
+}

@@ -1,0 +1,53 @@
+{
+  "baseline": {
+    "candidate_false": 477,
+    "candidate_true": 262,
+    "candidate_unknown": 1368,
+    "contradicted": 100983,
+    "correctness_bounds": [
+      0.26515759122394195,
+      0.3306399761376065
+    ],
+    "coverage": 0.9345176150863355,
+    "events": 17,
+    "judged_precision": 0.2837373923651994,
+    "raw_event_hits": 17,
+    "supported": 40003,
+    "unknown": 9879,
+    "usable_event_hits": 13
+  },
+  "orb": {
+    "candidate_false": 966,
+    "candidate_true": 139,
+    "candidate_unknown": 1002,
+    "contradicted": 5689,
+    "correctness_bounds": [
+      0.09011164274322168,
+      0.35190248348143083
+    ],
+    "coverage": 0.7382091592617909,
+    "events": 17,
+    "judged_precision": 0.1220679012345679,
+    "raw_event_hits": 11,
+    "supported": 791,
+    "unknown": 2298,
+    "usable_event_hits": 2
+  },
+  "selected": {
+    "candidate_false": 477,
+    "candidate_true": 262,
+    "candidate_unknown": 1368,
+    "contradicted": 83526,
+    "correctness_bounds": [
+      0.29599099926524614,
+      0.36071822189566494
+    ],
+    "coverage": 0.9352727773695811,
+    "events": 17,
+    "judged_precision": 0.3164755849065868,
+    "raw_event_hits": 17,
+    "supported": 38673,
+    "unknown": 8457,
+    "usable_event_hits": 12
+  }
+}

@@ -6,6 +6,7 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 .ruff_cache/
+.mypy_cache/
 
 # Local secrets
 .env
@@ -20,6 +21,10 @@ __pycache__/
 # Build artifacts
 build/
 dist/
+/artifacts/
+/data/raw/
+/data/cache/
+/data/models/
 
 # Generated reference universes and local annotation snapshots
 /evaluation/references/**

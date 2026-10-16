@@ -1,0 +1,3 @@
+method,true_positive_pairs,false_positive_pairs,unknown_pairs,confirmed_events,detected_confirmed_events
+orb,875,2744,3140,53,42
+ldo,1703,1586,3470,53,48

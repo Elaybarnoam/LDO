@@ -1,0 +1,40 @@
+name: External research runtime
+
+on:
+  workflow_dispatch:
+    inputs:
+      check_gpu_runner:
+        description: "Check an already provisioned self-hosted Linux GPU runner (requires LDO_MODEL_ROOT)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  prerequisites:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.32"
+      - run: uv sync --locked
+      - run: uv run ldo-research doctor
+      - name: Explain external evidence requirements
+        run: echo "GPU/model/native experiments require provisioned assets and a frozen protocol. This job checks prerequisites only and does not claim a scientific rerun. See docs/reproducibility.md."
+
+  gpu-runtime:
+    if: ${{ inputs.check_gpu_runner }}
+    runs-on: [self-hosted, linux, gpu]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.32"
+      - name: Install isolated model runtime
+        run: UV_PROJECT_ENVIRONMENT="$RUNNER_TEMP/ldo-gpu-env" uv sync --locked --extra ldo
+      - name: Verify released model artifacts and device visibility
+        run: UV_PROJECT_ENVIRONMENT="$RUNNER_TEMP/ldo-gpu-env" uv run ldo-research doctor --model-root "$LDO_MODEL_ROOT" --probe-cuda
+      - name: Execute CUDA tensor operation
+        run: UV_PROJECT_ENVIRONMENT="$RUNNER_TEMP/ldo-gpu-env" uv run python -c "import torch; assert torch.cuda.is_available(); x = torch.ones(4, device='cuda'); assert x.sum().item() == 4"

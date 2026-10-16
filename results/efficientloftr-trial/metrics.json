@@ -1,0 +1,31 @@
+{
+  "baseline": {
+    "contradicted": 20845,
+    "correctness_bounds": [
+      0.3258059796127396,
+      0.4916597571087158
+    ],
+    "coverage": 0.8341462225040238,
+    "judged_precision": 0.3905861716123374,
+    "pairs": 320,
+    "positive_pairs": 128,
+    "supported": 13360,
+    "unknown": 6801,
+    "usable_positive_pairs": 104
+  },
+  "candidate": {
+    "contradicted": 77742,
+    "correctness_bounds": [
+      0.3312213571115524,
+      0.5793614292902786
+    ],
+    "coverage": 0.7518599278212738,
+    "judged_precision": 0.44053598929172844,
+    "pairs": 320,
+    "positive_pairs": 128,
+    "supported": 61216,
+    "unknown": 45861,
+    "usable_positive_pairs": 117
+  },
+  "promoted": false
+}
