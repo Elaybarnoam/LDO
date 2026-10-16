@@ -8,6 +8,8 @@ version = "0.1.0"
 description = "Causal visual loop detection and independent geometric evaluation"
 readme = "README.md"
 authors = [{ name = "Elay Barnoam" }]
+license = "Apache-2.0 AND GPL-3.0-or-later"
+license-files = ["LICENSE", "NOTICE", "src/loop_eval/benchmarks/orb_slam3/instrumentation/LICENSE"]
 requires-python = ">=3.11,<3.12"
 dependencies = [
     "numpy",
@@ -37,6 +39,9 @@ ldo-research = "loop_eval.cli:main"
 
 [project.urls]
 Repository = "https://github.com/Elaybarnoam/LDO"
+Documentation = "https://github.com/Elaybarnoam/LDO/blob/main/docs/index.md"
+Issues = "https://github.com/Elaybarnoam/LDO/issues"
+Discussions = "https://github.com/Elaybarnoam/LDO/discussions"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/ldo", "src/loop_verification", "src/stereo_observations", "src/loop_eval"]
@@ -49,7 +54,7 @@ allow-direct-references = true
 "configs" = "ldo_research_resources/configs"
 
 [tool.hatch.build.targets.sdist]
-include = ["src", "configs", "tests", "evaluation", "scripts", "examples", "docs", "results", "data", "README.md", "CONTRIBUTING.md", "CHANGELOG.md", "CITATION.cff", "pyproject.toml", "uv.lock"]
+include = ["src", "configs", "tests", "evaluation", "scripts", "examples", "docs", "results", "data", "README.md", "CONTRIBUTING.md", "CHANGELOG.md", "CITATION.cff", "LICENSE", "NOTICE", "pyproject.toml", "uv.lock"]
 
 [[tool.uv.index]]
 name = "pytorch-cu128"

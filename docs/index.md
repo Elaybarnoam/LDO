@@ -18,6 +18,9 @@ assessment have separate interfaces and separate scientific meanings.
 | [Limitations](limitations.md) | What the evidence supports and what remains open |
 | [Migration decisions](decisions/layout.md) | Layout changes, compatibility, and preserved artifacts |
 | [Validation](validation.md) | Current checks and remaining external-runtime verification |
+| [Contribution roadmap](roadmap.md) | CPU starter tasks, research proposals and community channels |
+| [Licensing](licensing.md) | Original-code license and upstream exceptions |
+| [Release 0.1.0](releases/v0.1.0.md) | Research-preview scope and installation |
 
 `archive/` preserves the earlier `.docs/` research record byte-for-byte. Its
 historical commands and relative links describe earlier layouts; use current

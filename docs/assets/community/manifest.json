@@ -1,0 +1,34 @@
+{
+  "kind": "saved_evidence_presentation",
+  "research_result": false,
+  "duration_seconds": 24,
+  "scope": "First two archived diagnosed failure figures; TartanAir OldTownFall simulation",
+  "limitations": "No trajectory, new inference, runtime acceptance/rejection or real-world validation",
+  "generator": "scripts/figures/render_community.py",
+  "generator_sha256": "f6a4d92d52dd4bd72a6ff0184b95f7d9af40bcf1a06ef8f1bf858652a5d707d7",
+  "pillow_version": "12.3.0",
+  "sources": {
+    "docs\\archive\\ldo-matching-diagnostics-figures.json": "0a85daada5d932843c01aae951790e6bb7a01aa8d3ea28009c19c040fbf9398d",
+    "docs\\archive\\figures\\matching-diagnostics\\P001_revisit_13000000000.png": "44c113b7c5b67b5c433d9d68e11db3e2605ff92a823639a7b6e87b79ef0f3980",
+    "docs\\archive\\figures\\matching-diagnostics\\P001_revisit_13999999488.png": "2750ca88f73140bc624da288a585c6fded8f791077237b29887c5038b6483af6"
+  },
+  "selected_pairs": [
+    {
+      "event_id": "revisit_13000000000",
+      "trajectory": "P001",
+      "query": 13000000000,
+      "historical": 8000000000
+    },
+    {
+      "event_id": "revisit_13999999488",
+      "trajectory": "P001",
+      "query": 16000000512,
+      "historical": 8500000256
+    }
+  ],
+  "outputs": {
+    "evidence-poster.png": "6564d1f2c417398d18550f47b375e137e8103ed138180438ea3c17693b052769",
+    "evidence-walkthrough.gif": "5ee7acb4dc2e369f4b85d3acd622ccaadc79bf2485b09b5e36b53fbae7748b48",
+    "social-preview.png": "db331b52b152499f8fe47e00c963b8581faf3fd4b4a06c0c5fbb80a91260c787"
+  }
+}

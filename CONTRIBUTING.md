@@ -1,5 +1,17 @@
 # Contributing
 
+Welcome. Start with [good first issues](https://github.com/Elaybarnoam/LDO/contribute)
+or the [contribution roadmap](docs/roadmap.md). Beginner tasks should run on CPU
+without checkpoints or dataset downloads. Ask setup questions in
+[Q&A](https://github.com/Elaybarnoam/LDO/discussions/categories/q-a); use issues for
+reproducible bugs and agreed work, and Ideas for early research proposals.
+
+For a small fix, fork the repository, create a focused branch, make the change,
+run the relevant checks below, and open a pull request explaining the problem,
+resulting behavior and validation. Large research changes should start with a
+protocol discussion. You do not need to reproduce every GPU study to improve
+documentation or tooling. State which checks you could run and which need help.
+
 Use Python 3.11 and install the locked environment with `uv sync --locked`.
 Run `uv run python -m pytest -q`, `uv run ruff check .`, and
 `uv run ruff format --check .` before submitting a change.
@@ -28,5 +40,7 @@ require a new policy/evaluator identity, regression checks, and a separate resul
 The [migration ledger](docs/decisions/migration-ledger.json) records original paths
 and hashes. See [architecture](docs/architecture.md) for package responsibilities.
 
-Project licensing is not yet specified. No license grant is implied by this guide;
-upstream model, data, and source terms remain separate.
+Original project contributions use Apache-2.0; GPL instrumentation contributions
+retain their directory's license. Submit work you have permission to contribute
+and preserve third-party notices. See [licensing](docs/licensing.md).
+Review is best-effort; small, reproducible changes are easier to assess.

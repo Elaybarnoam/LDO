@@ -1,0 +1,23 @@
+name: Bug report
+description: Report a reproducible failure in installation, runtime, or evaluation.
+labels: [bug]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Expected and observed behavior
+      description: Include the exact command and a minimal reproduction. Remove credentials and private paths from logs.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Commit or release, OS, Python version, and relevant doctor output. Include GPU/runtime details only if involved.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and scope
+      description: Relevant traceback, config, dataset role, and artifact identity. State whether this is synthetic smoke, saved-evidence review, or learned inference.

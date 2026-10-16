@@ -1,0 +1,23 @@
+name: Research or evaluation proposal
+description: Propose an adapter, benchmark, model comparison, or method change.
+labels: [research]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question and proposed change
+      description: What uncertainty does this resolve, and which modules would change?
+    validations:
+      required: true
+  - type: textarea
+    id: protocol
+    attributes:
+      label: Evaluation protocol
+      description: Baseline, data roles, metrics and denominators, unknown accounting, compute budget, and promotion criteria. Identify inspected data explicitly.
+    validations:
+      required: true
+  - type: textarea
+    id: delivery
+    attributes:
+      label: Deliverables and prerequisites
+      description: Reproduction commands, artifacts, data permissions, and required hardware.

@@ -111,6 +111,17 @@ def check():
                 if digest(metric_path) != row["source_metrics_sha256"]:
                     failures.append(f"Figure source metrics changed: {row['file']}")
 
+    community = ROOT / "docs/assets/community"
+    manifest = json.loads((community / "manifest.json").read_text())
+    if digest(ROOT / manifest["generator"]) != manifest["generator_sha256"]:
+        failures.append("Community generator changed; regenerate presentation assets")
+    for name, expected_hash in manifest["sources"].items():
+        if digest(ROOT / name) != expected_hash:
+            failures.append(f"Community source changed: {name}")
+    for name, expected_hash in manifest["outputs"].items():
+        if digest(community / name) != expected_hash:
+            failures.append(f"Community asset changed: {name}")
+
     spec = importlib.util.spec_from_file_location(
         "publication", ROOT / "scripts/reproduce/publish.py"
     )

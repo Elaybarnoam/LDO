@@ -4,12 +4,27 @@
 
 Research software by **Elay Barnoam** · Python 3.11 · synthetic and saved-evidence studies
 
+[![Checks](https://github.com/Elaybarnoam/LDO/actions/workflows/checks.yml/badge.svg)](https://github.com/Elaybarnoam/LDO/actions/workflows/checks.yml)
+[![Release](https://img.shields.io/github/v/release/Elaybarnoam/LDO?include_prereleases)](https://github.com/Elaybarnoam/LDO/releases)
+[![License: Apache 2.0](https://img.shields.io/badge/Original_code-Apache_2.0-blue.svg)](docs/licensing.md)
+
+[Quickstart](#quickstart) · [Method](docs/method.md) ·
+[Starter issues](https://github.com/Elaybarnoam/LDO/contribute) ·
+[Questions](https://github.com/Elaybarnoam/LDO/discussions) · [Roadmap](docs/roadmap.md)
+
 LDO retrieves historical camera observations and reports the local correspondences
 that support each proposal. Its current baseline combines frozen **MegaLoc** global
 descriptors with **SuperPoint + LightGlue** local matching. Replaceable model
 interfaces, causal replay, saved assignments, and independent reference assessment
 make it possible to examine where retrieval, matching, and geometric verification
 succeed or fail.
+
+![24-second saved-evidence walkthrough of two simulated OldTownFall revisit failures; original model assignments remain separate from reference-only oracle associations](docs/assets/community/evidence-walkthrough.gif)
+
+*Saved learned-model evidence from TartanAir simulation, selected to explain two
+failure mechanisms. This is a presentation replay, without a trajectory or runtime
+pose decision. [Reproduce it on CPU](examples/evidence_walkthrough/README.md);
+[view the static poster](docs/assets/community/evidence-poster.png).*
 
 The central research question is whether a proposal reaches a real revisit
 opportunity, whether its assignments are supported by independent geometry, and
@@ -229,5 +244,15 @@ your experiment: [MegaLoc](https://github.com/gmberton/MegaLoc),
 [Pinned revisions](src/ldo/upstream.lock.json) and [bibliography](docs/references.bib)
 provide the source record.
 
-The project's own license is not yet specified. Upstream source, models, datasets,
-and illustrative images retain their separate terms. See [contributing](CONTRIBUTING.md).
+Original project code is **Apache-2.0**, with the GPL instrumentation and third-party
+exceptions documented in [licensing](docs/licensing.md) and [NOTICE](NOTICE).
+Models, datasets and illustrative images retain their separate terms.
+
+## Contribute
+
+Start with a [small CPU-only issue](https://github.com/Elaybarnoam/LDO/contribute),
+report a reproducibility problem, or propose an evaluation in
+[Discussions](https://github.com/Elaybarnoam/LDO/discussions). Current priorities
+are clean Linux setup, actionable diagnostics, accessible evidence review, dataset
+adapters and retrieval scaling. See [the roadmap](docs/roadmap.md) and
+[contribution guide](CONTRIBUTING.md) for scope and validation commands.

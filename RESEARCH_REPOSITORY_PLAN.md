@@ -13,7 +13,7 @@ The runtime packages now live under `src/`, evaluation uses `loop_eval`, and pol
 
 Historical `.docs/` evidence is preserved byte-for-byte in `docs/archive/`, with an old-to-new migration ledger and numerical-definition preservation checks. The archive deliberately retains its original structure; current indexes provide the new navigation. Existing bulk evidence stays in place. Large modules retain their cohesive responsibilities instead of being split solely by file length.
 
-See [validation](docs/validation.md), [layout decisions](docs/decisions/layout.md), and the [documentation index](docs/index.md). Full external model/native experiment reruns, a genuinely independent second-machine scientific reproduction, and new research studies are not claimed by repository checks. The project license remains an owner decision; authorship is Elay Barnoam.
+See [validation](docs/validation.md), [layout decisions](docs/decisions/layout.md), and the [documentation index](docs/index.md). Full external model/native experiment reruns, a genuinely independent second-machine scientific reproduction, and new research studies are not claimed by repository checks. The owner has authorized Apache-2.0 for original code, with GPL instrumentation and upstream exceptions documented in [licensing](docs/licensing.md); authorship is Elay Barnoam.
 
 This plan covers the directory tree, Python packaging, module design, native/GPU execution, configuration, experimental integrity, mathematical documentation, figures, and the final README. It separates changes that preserve existing behavior from new research that requires a new protocol and fresh evidence.
 

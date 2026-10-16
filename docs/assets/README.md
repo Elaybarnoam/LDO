@@ -8,6 +8,8 @@
 | `figures/joint-matcher-trial` | All 320 identical validation pairs | Failed EfficientLoFTR trial; supported/contradicted/unknown counts |
 | `figures/retrieval-evidence` | All 11 original Factory/Desert trajectories | Original independent pair labels and confirmed-event counts |
 | Historical matching-diagnostic PNGs | Four saved failure events | Original figure/image/evidence hashes in the archived figure manifest |
+| `community/evidence-walkthrough` | 24-second presentation of two archived failure pairs | Selected TartanAir simulation evidence; no inference or operational decision |
+| `community/social-preview` | Repository share card with an intact archived figure | Presentation asset; separate upstream image terms |
 
 Regenerate:
 
@@ -15,6 +17,7 @@ Regenerate:
 uv sync --locked --extra visualization
 uv run python scripts/reproduce/publish.py --figures docs/assets/figures
 uv run python scripts/figures/render_diagrams.py
+uv run python scripts/figures/render_community.py --output artifacts/community
 ```
 
 Quantitative graphics have SVG/PDF exports and PNG previews. Diagram sources are

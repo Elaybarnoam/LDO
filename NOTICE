@@ -1,0 +1,18 @@
+LDO: Causal Visual Loop Detection
+Copyright 2026 Elay Barnoam
+
+Original LDO code and documentation are licensed under Apache License 2.0,
+except where a file or directory specifies different terms.
+
+Exceptions and external assets:
+- src/loop_eval/benchmarks/orb_slam3/instrumentation/ integrates with GPLv3
+  ORB-SLAM3 and is distributed under GPL-3.0-or-later; see its LICENSE.
+- Dataset images in docs/archive/figures/ and derivatives of those images in
+  docs/assets/community/ retain their upstream dataset terms. Apache 2.0 does
+  not relicense them.
+- Historical third-party quotations and material retain their original terms.
+- Model sources, weights, native dependencies and bulk datasets are obtained
+  separately and retain their upstream terms.
+
+See docs/licensing.md for scope, source links and component-specific notes.
+No institution, upstream author or dataset provider endorses this project.
