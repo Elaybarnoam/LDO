@@ -5,12 +5,12 @@
   "scope": "First two archived diagnosed failure figures; TartanAir OldTownFall simulation",
   "limitations": "No trajectory, new inference, runtime acceptance/rejection or real-world validation",
   "generator": "scripts/figures/render_community.py",
-  "generator_sha256": "f6a4d92d52dd4bd72a6ff0184b95f7d9af40bcf1a06ef8f1bf858652a5d707d7",
+  "generator_sha256": "2b10fe2858ba412ae85019eb7d634bc7510722040223e3cdc2314e20e2909fe7",
   "pillow_version": "12.3.0",
   "sources": {
-    "docs\\archive\\ldo-matching-diagnostics-figures.json": "0a85daada5d932843c01aae951790e6bb7a01aa8d3ea28009c19c040fbf9398d",
-    "docs\\archive\\figures\\matching-diagnostics\\P001_revisit_13000000000.png": "44c113b7c5b67b5c433d9d68e11db3e2605ff92a823639a7b6e87b79ef0f3980",
-    "docs\\archive\\figures\\matching-diagnostics\\P001_revisit_13999999488.png": "2750ca88f73140bc624da288a585c6fded8f791077237b29887c5038b6483af6"
+    "docs/archive/ldo-matching-diagnostics-figures.json": "0a85daada5d932843c01aae951790e6bb7a01aa8d3ea28009c19c040fbf9398d",
+    "docs/archive/figures/matching-diagnostics/P001_revisit_13000000000.png": "44c113b7c5b67b5c433d9d68e11db3e2605ff92a823639a7b6e87b79ef0f3980",
+    "docs/archive/figures/matching-diagnostics/P001_revisit_13999999488.png": "2750ca88f73140bc624da288a585c6fded8f791077237b29887c5038b6483af6"
   },
   "selected_pairs": [
     {

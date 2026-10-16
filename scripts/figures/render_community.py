@@ -49,14 +49,14 @@ def render(output):
     output.mkdir(parents=True, exist_ok=True)
     manifest_path = ROOT / "docs/archive/ldo-matching-diagnostics-figures.json"
     source_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    sources = {str(manifest_path.relative_to(ROOT)): digest(manifest_path)}
+    sources = {manifest_path.relative_to(ROOT).as_posix(): digest(manifest_path)}
     selected = source_manifest["figures"][:2]
     figures = []
     for row in selected:
         path = ROOT / "docs/archive/figures/matching-diagnostics" / Path(row["path"]).name
         if digest(path) != row["sha256"]:
             raise ValueError(f"Archived figure hash mismatch: {path}")
-        sources[str(path.relative_to(ROOT))] = digest(path)
+        sources[path.relative_to(ROOT).as_posix()] = digest(path)
         figures.append(path)
     frames = [
         slide(
