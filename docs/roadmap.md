@@ -6,11 +6,11 @@ or a schedule. Track concrete work in [issues](https://github.com/Elaybarnoam/LD
 
 ## Start without a GPU
 
-- Record a clean Linux CPU installation, including the exact OS/Python/uv versions,
+- [Issue #1: verify a clean Linux CPU installation](https://github.com/Elaybarnoam/LDO/issues/1), including the exact OS/Python/uv versions,
   commands, expected smoke output and troubleshooting discovered during setup.
-- Improve the missing-model-root diagnostic while preserving machine-readable
+- [Issue #2: improve the missing-model-root diagnostic](https://github.com/Elaybarnoam/LDO/issues/2) while preserving machine-readable
   doctor output and avoiding downloads or heavyweight model imports.
-- Make the correspondence viewer accessible without relying on color alone.
+- [Issue #3: add accessible text alternatives](https://github.com/Elaybarnoam/LDO/issues/3) to the correspondence viewer.
   Use a tiny generated fixture; no research images or checkpoints are required.
 
 See [starter issues](https://github.com/Elaybarnoam/LDO/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22good%20first%20issue%22)
@@ -18,10 +18,10 @@ and [contributing](../CONTRIBUTING.md) for local validation and scientific bound
 
 ## Research contributions
 
-- A dataset adapter with explicit timestamp, coordinate, calibration and split
+- [Issue #4: a dataset adapter](https://github.com/Elaybarnoam/LDO/issues/4) with explicit timestamp, coordinate, calibration and split
   contracts. Choose a new environment with suitable permissions; do not relabel
   inspected OldTownFall or Factory/Desert observations as a fresh test.
-- A retrieval scaling benchmark measuring exact-index latency and memory as
+- [Issue #5: a retrieval scaling benchmark](https://github.com/Elaybarnoam/LDO/issues/5) measuring exact-index latency and memory as
   history grows, with deterministic CPU inputs and machine details.
 - A small end-to-end learned-model demo with permitted image redistribution,
   saved original assignments, an observed accepted/rejected decision and a

@@ -4,6 +4,17 @@ LDO studies causal visual loop proposals and the quality of their reported
 correspondences. Detection, operational verification, and independent reference
 assessment have separate interfaces and separate scientific meanings.
 
+## Practical guides
+
+| Guide | What you can do |
+| --- | --- |
+| [Visual loop detection with MegaLoc and LightGlue](guides/visual-loop-detection.md) | Check the CPU interface and integrate the learned detector with chronological images |
+| [Evaluate loop-closure correspondences](guides/evaluate-correspondences.md) | Interpret independent geometric verdicts and choose the right evaluation workflow |
+| [Reproduce LDO results](guides/reproduce-results.md) | Regenerate public evidence tables and figures from a checkout |
+| [Precision and useful loop events](guides/precision-and-event-retention.md) | Understand why stronger filtering can lose useful event coverage |
+
+## Research reference
+
 | Start here | Purpose |
 | --- | --- |
 | [Overview](overview.md) | Scope, contributions, and research questions |

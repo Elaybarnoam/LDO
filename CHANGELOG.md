@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Clearer visual loop-closure detection and place-recognition descriptions.
+- Practical guides for learned inference, correspondence evaluation and result reproduction.
+- Evidence walkthrough explaining precision versus useful-event retention.
+- Direct starter-issue links throughout the README, roadmap and contribution guide.
+
 ## 0.1.0 — 2026-10-16 — research preview
 
 - Installable `src/` packages and the `loop_eval` research namespace.

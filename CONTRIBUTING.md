@@ -6,6 +6,12 @@ without checkpoints or dataset downloads. Ask setup questions in
 [Q&A](https://github.com/Elaybarnoam/LDO/discussions/categories/q-a); use issues for
 reproducible bugs and agreed work, and Ideas for early research proposals.
 
+Choose [Linux setup (#1)](https://github.com/Elaybarnoam/LDO/issues/1),
+[actionable diagnostics (#2)](https://github.com/Elaybarnoam/LDO/issues/2), or
+[accessible review (#3)](https://github.com/Elaybarnoam/LDO/issues/3) for a first
+contribution. The [practical guides](docs/index.md#practical-guides) explain how
+to run the interface, interpret evidence and reproduce the public results.
+
 For a small fix, fork the repository, create a focused branch, make the change,
 run the relevant checks below, and open a pull request explaining the problem,
 resulting behavior and validation. Large research changes should start with a

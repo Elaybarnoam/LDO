@@ -12,12 +12,20 @@ Research software by **Elay Barnoam** · Python 3.11 · synthetic and saved-evid
 [Starter issues](https://github.com/Elaybarnoam/LDO/contribute) ·
 [Questions](https://github.com/Elaybarnoam/LDO/discussions) · [Roadmap](docs/roadmap.md)
 
-LDO retrieves historical camera observations and reports the local correspondences
-that support each proposal. Its current baseline combines frozen **MegaLoc** global
+LDO is research software for **visual loop-closure detection** and **visual place
+recognition**: it retrieves historical camera observations and reports the local
+correspondences that support each proposal. Its current baseline combines frozen **MegaLoc** global
 descriptors with **SuperPoint + LightGlue** local matching. Replaceable model
 interfaces, causal replay, saved assignments, and independent reference assessment
 make it possible to examine where retrieval, matching, and geometric verification
 succeed or fail.
+
+| Practical guides | Start here |
+| --- | --- |
+| Run visual loop detection with MegaLoc and LightGlue | [CPU check, learned-model prerequisites, and Python interface](docs/guides/visual-loop-detection.md) |
+| Evaluate loop-closure correspondences | [Supported, contradicted, unknown, and independent geometry](docs/guides/evaluate-correspondences.md) |
+| Reproduce LDO results | [Commands, expected values, and evidence checks](docs/guides/reproduce-results.md) |
+| Understand a matching tradeoff | [Why higher precision can lose useful loop events](docs/guides/precision-and-event-retention.md) |
 
 ![24-second saved-evidence walkthrough of two simulated OldTownFall revisit failures; original model assignments remain separate from reference-only oracle associations](docs/assets/community/evidence-walkthrough.gif)
 
@@ -249,6 +257,14 @@ exceptions documented in [licensing](docs/licensing.md) and [NOTICE](NOTICE).
 Models, datasets and illustrative images retain their separate terms.
 
 ## Contribute
+
+These three starter tasks need no GPU, checkpoints, or dataset download:
+
+| Task | Starting point |
+| --- | --- |
+| Verify and document a clean Linux CPU installation | [Issue #1](https://github.com/Elaybarnoam/LDO/issues/1) |
+| Make missing model-root errors actionable | [Issue #2](https://github.com/Elaybarnoam/LDO/issues/2) |
+| Add text alternatives to correspondence review canvases | [Issue #3](https://github.com/Elaybarnoam/LDO/issues/3) |
 
 Start with a [small CPU-only issue](https://github.com/Elaybarnoam/LDO/contribute),
 report a reproducibility problem, or propose an evaluation in
