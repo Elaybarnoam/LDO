@@ -19,6 +19,11 @@ No project website or off-GitHub promotion is part of this implementation.
 - Resource-list candidates are reviewed for scope and contribution rules. A
   proposed entry remains a proposal until an independent maintainer accepts it.
 
+Published GitHub follow-up: [the precision/event case-study discussion](https://github.com/Elaybarnoam/LDO/discussions/7).
+The existing [pinned welcome](https://github.com/Elaybarnoam/LDO/discussions/6)
+links the four guides and three beginner tasks. The About description now uses
+the specific problem terms; thirteen relevant topics cover the task and model stack.
+
 ## Resource-list fit
 
 | Repository | Scope and decision |
@@ -26,7 +31,7 @@ No project website or off-GitHub promotion is part of this implementation.
 | [gmberton/awesome-Visual-Place-Recognition](https://github.com/gmberton/awesome-Visual-Place-Recognition/blob/main/how-to-PR.md) | Requires a paper, venue/year and BibTeX. LDO has no publication entry; do not submit it as a paper. |
 | [bas-db/intro-to-vpr](https://github.com/bas-db/intro-to-vpr#contributing) | Educational glossary contributions. A promotional software entry does not fit its term format. |
 | [kanster/awesome-slam](https://github.com/kanster/awesome-slam#contributing) | Accepts fitting resources by PR; its code list is broad, but visible maintenance is old. |
-| [SilenceOverflow/Awesome-SLAM](https://github.com/SilenceOverflow/Awesome-SLAM) | Invites PRs with a linked repository name and one-sentence introduction; inspect the relevant software section before proposing an entry. |
+| [SilenceOverflow/Awesome-SLAM](https://github.com/SilenceOverflow/Awesome-SLAM) | Invites PRs with a linked repository name and one-sentence introduction. [PR #9](https://github.com/SilenceOverflow/Awesome-SLAM/pull/9) proposes one line in Deep Features; submitted for maintainer review, not an accepted listing. |
 
 Use a factual entry describing a camera-only research tool, not a complete SLAM
 system, a publication or a proven improvement to downstream localization. Submit
